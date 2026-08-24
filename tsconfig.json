@@ -1,16 +1,16 @@
 {
 	"compilerOptions": {
 		"outDir": "./build/",
+		"rootDir": ".",
 		"noImplicitAny": true,
 		"module": "ESNext",
-		"target": "es5",
+		"target": "ES2015",
 		"jsx": "react-jsx",
 		"strict": true,
 		"allowJs": true,
-		"moduleResolution": "node",
+		"moduleResolution": "bundler",
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
-		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"]
 		},
