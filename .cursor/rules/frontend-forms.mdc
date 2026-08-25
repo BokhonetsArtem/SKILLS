@@ -1,0 +1,17 @@
+---
+description: "Use when form state, validation, field binding, or submit. Skip for layout, CSS, Figma (frontend-layout), slice or schema placement (frontend-architecture), and source-to-sink XSS (frontend-security). Do not start just because a ts/tsx file is open."
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Frontend forms
+
+Если задача не про form state, validation, field binding или submit — **не** читай скил и не применяй его правила. Открытый `tsx` сам по себе не триггер.
+
+Вёрстка, CSS, Figma и визуальная сетка полей без form state — `frontend-layout`. Размещение слайса или schema — `frontend-architecture`. XSS, секреты и unsafe preview — `frontend-security`.
+
+Перед работой с поведением формы (валидация, field binding, submit, dynamic fields, form a11y) сначала прочитай полный скил целиком:
+
+`.cursor/skills/frontend/frontend-forms/SKILL.md`
+
+Правила форм не дублируй здесь — следуй скилу.

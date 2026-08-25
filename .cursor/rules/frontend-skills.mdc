@@ -1,15 +1,15 @@
 ---
-description: "Use when laying out UI or Figma mockups. Skip for API, routing, test-only, or non-UI work. Do not add a styling stack or UI kit unless the repo already uses it."
+description: "Use when laying out UI or Figma mockups (including the visual shell of a form: grid, FormField, CSS). Skip for API, routing, test-only, or non-UI work. Skip form state, validation, and submit — those are frontend-forms, not this layout rule. Do not add a styling stack or UI kit unless the repo already uses it."
 globs: "**/*.{tsx,css}"
 alwaysApply: false
 ---
 
 # Frontend layout
 
-Если задача не про вёрстку, стили, UI-layout или макет Figma (только API, тесты, роутинг, модель) — **не** читай скил и не применяй его правила. Размещение нового слайса/модуля/границы — зона `frontend-architecture`, не этого правила; layout по-прежнему владеет стеком стилей, примитивами и Figma. Проверка существующих stories / visual tests как часть UI-задачи этому не мешает.
+Если задача не про вёрстку, стили, UI-layout или макет Figma (только API, тесты, роутинг, модель) — **не** читай скил и не применяй его правила. Размещение нового слайса/модуля/границы — зона `frontend-architecture`, не этого правила; layout по-прежнему владеет стеком стилей, примитивами и Figma. Form state, validation, submit и array fields — зона `frontend-forms`; это правило владеет только визуальной оболочкой формы, не поведением полей. Проверка существующих stories / visual tests как часть UI-задачи этому не мешает.
 
 Перед вёрсткой UI или работой с макетом Figma сначала прочитай полный скил целиком:
 
-`.cursor/frontend-skills/frontend-layout/SKILL.md`
+`.cursor/skills/frontend/frontend-layout/SKILL.md`
 
-Указатель для auto-discovery: `.cursor/skills/frontend-layout/SKILL.md`. Правила вёрстки не дублируй здесь — следуй скилу.
+Правила вёрстки не дублируй здесь — следуй скилу.

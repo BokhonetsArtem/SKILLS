@@ -6,8 +6,6 @@
 
 Нет Tailwind в репо — закрой этот файл. Не добавляй `tailwind.config`, `@tailwind`, пакет `tailwindcss`, утилиты `className="flex gap-4"` и `cn`/`cva` «для удобства». Дальше — стек, который реально найден (Modules, SCSS, CSS-in-JS, UI-kit), а не CSS Modules «на всякий случай».
 
-В YEAHUB Tailwind **нет** — этот файл не применяется.
-
 Не добавляй логирование в вёрстку и в примеры.
 
 ## Когда этот трек

@@ -2,7 +2,7 @@
 
 Читай после [pravila.md](pravila.md) **только если** в репозитории уже есть runtime или zero-runtime CSS-in-JS. Это не дефолт скила.
 
-Не добавляй логирование в вёрстку и в примеры. Не ставь `styled-components` / Emotion / Stitches в репо, где их нет (в YEAHUB их нет).
+Не добавляй логирование в вёрстку и в примеры. Не ставь `styled-components` / Emotion / Stitches в репо, где их нет.
 
 ## Когда этот трек
 
@@ -73,7 +73,7 @@ Zero-runtime и token pipelines: **не** пиши runtime `styled.div` из sty
 
 | Не надо | Надо |
 | --- | --- |
-| Добавить styled-components в YEAHUB / Tailwind-репо | стек, который уже есть |
+| Добавить styled-components в репо без CSS-in-JS | стек, который уже есть |
 | `color: #400799` в шаблонной строке | `theme.colors.*` / токен |
 | `margin-right` на каждом ребёнке | `gap` на родителе |
 | Свой `styled.button` рядом с `Button` | reuse примитива |

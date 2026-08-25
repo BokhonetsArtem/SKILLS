@@ -9,7 +9,7 @@
 
 ## 1. Ритм: `gap` на родителе, не margin-хак
 
-### CSS Modules (если это стек; в YEAHUB — да)
+### CSS Modules (если это стек)
 
 ```tsx
 // надо
@@ -52,7 +52,7 @@
 
 ## 2. Типографика и цвет: `Text` / токены, не hex и `font-size`
 
-### CSS Modules (если это стек; в YEAHUB — да)
+### CSS Modules (если это стек)
 
 ```tsx
 // надо
@@ -92,7 +92,7 @@
 <h1 className="text-[20px] font-[600] text-[#400799]">{title}</h1>
 ```
 
-На YEAHUB не подменяй `Text` утилитами Tailwind. В репо без `Text` — текстовый примитив или токены соседей, не hex.
+Если стек — CSS Modules с `Text`, не подменяй его утилитами Tailwind. В репо без `Text` — текстовый примитив или токены соседей, не hex.
 
 ## 3. Кнопка: reuse `Button`, не свой `<button>`
 
@@ -125,7 +125,7 @@ import { Button } from '@/shared/ui/Button';
 
 ## 4. Сетка карточек: `display: grid` в module, не тройной nested flex
 
-Эталон: [`GurusList.module.css`](../../../../src/entities/guru/ui/GurusList/GurusList.module.css).
+Эталон: [`GurusList.module.css`](../../../../../src/entities/guru/ui/GurusList/GurusList.module.css).
 
 ```css
 /* надо */
@@ -254,5 +254,5 @@ Wiki / каталог с колонкой фильтров — другой layo
 - [ ] Кнопка — существующий примитив проекта
 - [ ] Карточки — Grid синтаксисом стека
 - [ ] Keyframes не через Tailwind soup, если стек не просит иное
-- [ ] Фильтры: как у ближайшей страницы той же зоны (на YEAHUB — `SearchSection` vs `QuestionsPage`)
+- [ ] Фильтры: как у ближайшей страницы той же зоны (админ: `SearchSection`; wiki/каталог: `QuestionsPage`)
 - [ ] Нет логов в разметке

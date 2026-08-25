@@ -1,6 +1,6 @@
 ---
 name: frontend-architecture
-description: Определяет архитектуру текущего frontend-проекта и размещает код — границы модулей, public API, зависимости, state/API, рефакторинг структуры. Use when новый слайс/модуль, куда класть код, границы feature/entity, импорты, циклы, ownership state/API или реорганизация frontend-структуры. Не для вёрстки, CSS, Figma и не для генерации .ai-factory/ARCHITECTURE.md. Не навязывает FSD и не добавляет второй архитектурный стиль или state manager, если их нет в репозитории.
+description: Определяет архитектуру текущего frontend-проекта и размещает код — границы модулей, public API, зависимости, state/API, рефакторинг структуры. Use when новый слайс/модуль, куда класть код, границы feature/entity, импорты, циклы, ownership state/API (включая куда класть form state) или реорганизация frontend-структуры. Не для вёрстки, CSS, Figma и не для генерации .ai-factory/ARCHITECTURE.md. Не для поведения полей, validation и submit — это frontend-forms. Не навязывает FSD и не добавляет второй архитектурный стиль или state manager, если их нет в репозитории.
 disable-model-invocation: false
 argument-hint: "[слайс | модуль | рефакторинг]"
 ---
@@ -13,9 +13,9 @@ argument-hint: "[слайс | модуль | рефакторинг]"
 
 Правила треков, границ, state/API и примеры **не копируй в этот файл**. Читай только нужный файл из `references/` (пути относительно этой папки скила).
 
-**Не этот скил.** Вёрстка, CSS, токены, Flex/Grid, макет Figma — [`frontend-layout`](../frontend-layout/SKILL.md). Стратегический документ `.ai-factory/ARCHITECTURE.md` — `aif-architecture`. Задача только про тесты, CI или инфраструктуру без структуры frontend-кода — остановись, `references/` не читай.
+**Не этот скил.** Вёрстка, CSS, токены, Flex/Grid, макет Figma — [`frontend-layout`](../frontend-layout/SKILL.md). Поведение полей, validation, submit и array fields — [`frontend-forms`](../frontend-forms/SKILL.md); этот скил владеет только размещением файлов формы/schema и тем, кто владеет form state. Стратегический документ `.ai-factory/ARCHITECTURE.md` — `aif-architecture`. Задача только про тесты, CI или инфраструктуру без структуры frontend-кода — остановись, `references/` не читай.
 
-Если задача сразу про **новый слайс/модуль и вёрстку** — сначала размещение (этот скил), затем стили ([`frontend-layout`](../frontend-layout/SKILL.md)). Не смешивай шаги и не переноси CSS-правила сюда.
+Если задача сразу про **новый слайс/модуль и вёрстку** — сначала размещение (этот скил), затем стили ([`frontend-layout`](../frontend-layout/SKILL.md)). Если сразу про **новый слайс и форму** — сначала размещение (этот скил), затем поведение ([`frontend-forms`](../frontend-forms/SKILL.md)), затем оболочка ([`frontend-layout`](../frontend-layout/SKILL.md)), если она нужна. Не смешивай шаги и не переноси CSS-правила или form-binding сюда.
 
 **Режим** (не грузи лишнее):
 
@@ -91,7 +91,7 @@ argument-hint: "[слайс | модуль | рефакторинг]"
 
 Не раздувай `shared`/common свалкой доменного UI и бизнес-логики. Не дроби модуль без причины, если аналог в этой зоне живёт крупнее. Не тащи доменный код на page/container, если в репо страница уже только композирует.
 
-После размещения, если нужна вёрстка экрана — передай её в [`frontend-layout`](../frontend-layout/SKILL.md).
+После размещения, если нужна вёрстка экрана — передай её в [`frontend-layout`](../frontend-layout/SKILL.md). Если нужно поведение формы (validation, submit, array fields) — передай его в [`frontend-forms`](../frontend-forms/SKILL.md). Шаги не смешивай.
 
 ## Шаг 5. Проверь зависимости и интеграцию
 
@@ -134,4 +134,5 @@ argument-hint: "[слайс | модуль | рефакторинг]"
 - Пользователь не просил миграцию → не переводи проект на FSD и не создавай параллельный стиль рядом со старым.
 - Пользователь не просил новый state manager → не добавляй второй клиент к уже существующему.
 - Нужна только вёрстка без новой границы модуля → это [`frontend-layout`](../frontend-layout/SKILL.md), не этот скил.
+- Нужны validation, submit или array fields без новой границы → это [`frontend-forms`](../frontend-forms/SKILL.md), не этот скил.
 - Нужен стратегический документ архитектуры проекта → это `aif-architecture`, не этот скил.

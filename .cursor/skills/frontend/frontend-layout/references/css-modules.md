@@ -10,10 +10,10 @@
 
 Сигналы: `import styles from './Name.module.css'` или `./Name.module.scss`, нет доминирующего Tailwind.
 
-- Только `*.module.css` (YEAHUB) — этот файл. Sass **не** добавляй.
+- Только `*.module.css` — этот файл. Sass **не** добавляй.
 - `*.module.scss` / `*.module.sass` — этот файл **и** [scss.md](scss.md). Scoping, colocation, `classNames` — отсюда; `$`, `@use`, nest, mixins — из SCSS. Не переименовывай в `.module.css` «чтобы было как в каноне».
 
-В YEAHUB этот трек обязателен (FSD, `var(--*)`, stylelint `declaration-strict-value`). В другом Modules-проекте — те же идеи, но имена примитивов и линтер — как там.
+Идеи трека (токены `var(--*)`, stylelint, слои) применяй, если они уже есть в репозитории. Имена примитивов и линтер — как в этом репо.
 
 ## Файлы рядом с компонентом
 
@@ -27,7 +27,7 @@ SkillCreateForm/
 
 - Стили через CSS Modules, не глобальные классы и не inline `style` для цвета/типа (исключение: динамическая ширина вроде `style={{ width }}` у `Text`).
 - Импорт: `import styles from './Name.module.css'` или `from './Name.module.scss'` — тот суффикс, что у соседей. Не смешивай `.module.css` и `.module.scss` в одном компоненте.
-- Состав классов: как у соседей. В YEAHUB — пакет **`classnames`**, импорт **`classNames`**. **Не** подменяй на `clsx` / `cva` / `cn` из shadcn, если в репо их нет. Не копируй редкий локальный алиас `import cn from 'classnames'` из старых файлов YEAHUB.
+- Состав классов: как у соседей. Если в репо пакет **`classnames`** — импорт **`classNames`**. **Не** подменяй на `clsx` / `cva` / `cn` из shadcn, если в репо их нет. Не копируй редкий локальный алиас `import cn from 'classnames'` из старых файлов.
 
 ```tsx
 import classNames from 'classnames';
@@ -38,9 +38,7 @@ className={classNames(styles['filter-button'], isActive && styles.active, classN
 
 ## Имена классов: как в репозитории
 
-В YEAHUB в CSS — kebab-case. В TSX к классу с дефисом — скобки: `styles['filter-button']`. Одно слово — `styles.list`. Не пиши `.filterButton` в **новых** модулях YEAHUB.
-
-В другом Modules-проекте — как у соседей (camelCase тоже бывает). Не навязывай kebab, если файлы рядом в другом стиле.
+Если у соседей в CSS kebab-case — повтори: в TSX к классу с дефисом скобки `styles['filter-button']`, одно слово — `styles.list`. Не пиши `.filterButton` в **новых** модулях, если рядом kebab. CamelCase тоже бывает — не навязывай kebab, если файлы рядом в другом стиле.
 
 ## Без `composes`
 
@@ -48,7 +46,7 @@ className={classNames(styles['filter-button'], isActive && styles.active, classN
 
 ## 1D = layout-примитив с `gap`, когда он подходит
 
-Если в репозитории есть ряд-примитив вроде [`Flex`](../../../../src/shared/ui/Flex/Flex.tsx), предпочитай его для самостоятельных layout-обёрток страниц и фич. Но не добавляй лишний DOM-узел только ради `Flex`: внутренний layout уже существующего элемента, сложные селекторы и случаи, где так делают ближайшие компоненты, можно оформить через `display: flex` в module. Нет такого примитива — пиши flex так, как соседние modules.
+Если в репозитории есть ряд-примитив вроде [`Flex`](../../../../../src/shared/ui/Flex/Flex.tsx), предпочитай его для самостоятельных layout-обёрток страниц и фич. Но не добавляй лишний DOM-узел только ради `Flex`: внутренний layout уже существующего элемента, сложные селекторы и случаи, где так делают ближайшие компоненты, можно оформить через `display: flex` в module. Нет такого примитива — пиши flex так, как соседние modules.
 
 ```tsx
 import { Flex } from '@/shared/ui/Flex';
@@ -59,9 +57,9 @@ import { Flex } from '@/shared/ui/Flex';
 </Flex>
 ```
 
-На YEAHUB проп `gap` — только шкала `FlexGap`: `"4"` | `"6"` | `"8"` | `"10"` | `"12"` | `"14"` | `"16"` | `"20"` | `"24"` | `"26"` | `"28"` | `"30"` | `"32"` | `"40"` | `"48"` | `"52"` | `"60"` | `"100"` | `"120"`. Не выдумывай `"18"`.
+Если у `Flex` есть шкала `FlexGap` — только её значения: `"4"` | `"6"` | `"8"` | `"10"` | `"12"` | `"14"` | `"16"` | `"20"` | `"24"` | `"26"` | `"28"` | `"30"` | `"32"` | `"40"` | `"48"` | `"52"` | `"60"` | `"100"` | `"120"`. Не выдумывай `"18"`.
 
-Другие пропы YEAHUB: `direction`, `justify`, `align`, `wrap`, `maxWidth`, `maxHeight`, `flex={1}` (в `flexClasses` только `1`), `componentType` (`"main"` для оболочки админ-страницы).
+Другие пропы этого `Flex` (если они есть в типе): `direction`, `justify`, `align`, `wrap`, `maxWidth`, `maxHeight`, `flex={1}` (в `flexClasses` только `1`), `componentType` (`"main"` для оболочки админ-страницы).
 
 Не дублируй простую самостоятельную обёртку CSS-классом, если её без изменения DOM и поведения выражает `Flex`:
 
@@ -78,7 +76,7 @@ import { Flex } from '@/shared/ui/Flex';
 
 Отдельного Grid-компонента нет. Сетка карточек, колонки, дашборд — в `*.module.css`:
 
-Эталон: [`GurusList.module.css`](../../../../src/entities/guru/ui/GurusList/GurusList.module.css).
+Эталон: [`GurusList.module.css`](../../../../../src/entities/guru/ui/GurusList/GurusList.module.css).
 
 ```css
 .list {
@@ -98,7 +96,7 @@ import { Flex } from '@/shared/ui/Flex';
 
 ## Текст: примитив проекта, не `font-size` в новом module
 
-Если есть [`Text`](../../../../src/shared/ui/Text/Text.tsx): обязательный `variant`, цвет из `Pallete` (`color="black-800"`, по умолчанию `black-900`). `variant` только из [`Text/types.ts`](../../../../src/shared/ui/Text/types.ts). Не комбинируй суффиксы наугад: `body4-accent` и `body6-strong` в типе нет.
+Если есть [`Text`](../../../../../src/shared/ui/Text/Text.tsx): обязательный `variant`, цвет из `Pallete` (`color="black-800"`, по умолчанию `black-900`). `variant` только из [`Text/types.ts`](../../../../../src/shared/ui/Text/types.ts). Не комбинируй суффиксы наугад: `body4-accent` и `body6-strong` в типе нет.
 
 Нет `Text` — токены/классы как у соседей, всё равно не сырой `font-size` в новом module «подогнать заголовок».
 
@@ -113,7 +111,7 @@ import { Flex } from '@/shared/ui/Flex';
 
 ## Токены
 
-На YEAHUB — `src/app/styles/variables/`. В другом Modules-проекте — откуда соседи уже берут `var(--*)`.
+Токены — откуда соседи уже берут `var(--*)`. Часто это `src/app/styles/variables/` при FSD.
 
 | Файл | Зачем |
 | --- | --- |
@@ -136,7 +134,7 @@ import { Flex } from '@/shared/ui/Flex';
 
 ## Stylelint
 
-Если в репозитории есть stylelint — соблюдай его. На YEAHUB файл: [`.stylelintrc.json`](../../../../.stylelintrc.json).
+Если в репозитории есть stylelint — соблюдай его (часто [`.stylelintrc.json`](../../../../../.stylelintrc.json)).
 
 ### `declaration-strict-value`
 
@@ -179,7 +177,7 @@ background-color: white;
 
 ## Куда класть блок
 
-Ниже — если в репозитории FSD как на YEAHUB. Иная структура (`app/`, `components/`, feature folders) — клади блок как соседи, не навязывай FSD.
+Ниже — если в репозитории FSD (`src/app`, `pages`, `widgets`, …). Иная структура (`app/`, `components/`, feature folders) — клади блок как соседи, не навязывай FSD.
 
 ```
 src/app        — стили, лейауты, провайдеры (токены уже здесь)
@@ -201,7 +199,7 @@ src/shared/ui  — примитивы (Flex, Text, Card, Button, FormField, Tabl
 
 ## i18n: пользовательские строки
 
-Если в проекте нет i18n — не внедряй. Если есть — как у соседей. Ниже канон YEAHUB (`react-i18next` + enum + ru/en JSON).
+Если в проекте нет i18n — не внедряй. Если есть — как у соседей. Ниже канон, если в репо `react-i18next` + enum + ru/en JSON.
 
 ```tsx
 import { useTranslation } from 'react-i18next';
@@ -233,7 +231,7 @@ const { t } = useTranslation(i18Namespace.skill);
 
 ## Чеклист трека
 
-- [ ] `*.module.css` как у соседей (на YEAHUB — рядом, kebab-case, `classNames`)
+- [ ] `*.module.css` как у соседей (рядом с компонентом; kebab-case и `classNames` — если так у соседей)
 - [ ] Нет чужого стека (Tailwind, `cn`/`cva`, если их нет в репо)
 - [ ] 1D — layout-примитив с `gap`, если он есть; иначе flex как у соседей
 - [ ] 2D — `display: grid` в module

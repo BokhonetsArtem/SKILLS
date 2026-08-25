@@ -2,19 +2,19 @@
 
 Готовые сценарии. Сначала прочитай [pravila.md](pravila.md) и файл трека, выбранный на шаге 2 `SKILL.md` (Modules, Tailwind, CSS-in-JS, SCSS или UI-kit). Для иного стека — общие правила и ближайшая страница той же зоны.
 
-Это рецепты для репозитория, где уже есть такие оболочки (`PageWrapper`, `SearchSection`, `Flex`, `FormField`, …). **Нет их в проекте** — найди ближайшую страницу той же зоны в **этом** репо и копируй её состав. Не тащи YEAHUB-оболочки и не копируй Tailwind-сниппеты в репо без Tailwind.
+Это рецепты для репозитория, где уже есть такие оболочки (`PageWrapper`, `SearchSection`, `Flex`, `FormField`, …). **Нет их в проекте** — найди ближайшую страницу той же зоны в **этом** репо и копируй её состав. Не тащи оболочки из другого проекта и не копируй Tailwind-сниппеты в репо без Tailwind.
 
 Логи в вёрстку **не** добавляй. Сначала ближайшая страница **той же зоны**. Не тащи админский бар поиска на каталог и наоборот.
 
 | Задача | Опора в репозитории |
 | --- | --- |
-| Админ-таблица + поиск + фильтры | [`UsersTablePage.tsx`](../../../../src/pages/admin/user/users/ui/UserTablePage/UsersTablePage.tsx) |
-| Wiki / каталог (колонка фильтров) | [`QuestionsPage.tsx`](../../../../src/pages/wiki/question/questions/ui/QuestionsPage/QuestionsPage.tsx) |
-| Сетка карточек | [`GurusList.module.css`](../../../../src/entities/guru/ui/GurusList/GurusList.module.css) |
-| Форма | [`SkillCreateForm.tsx`](../../../../src/features/skill/createSkill/ui/SkillCreateForm/SkillCreateForm.tsx) + `FormField` в [`SkillForm.tsx`](../../../../src/entities/skill/ui/SkillForm/SkillForm.tsx) |
+| Админ-таблица + поиск + фильтры | [`UsersTablePage.tsx`](../../../../../src/pages/admin/user/users/ui/UserTablePage/UsersTablePage.tsx) |
+| Wiki / каталог (колонка фильтров) | [`QuestionsPage.tsx`](../../../../../src/pages/wiki/question/questions/ui/QuestionsPage/QuestionsPage.tsx) |
+| Сетка карточек | [`GurusList.module.css`](../../../../../src/entities/guru/ui/GurusList/GurusList.module.css) |
+| Форма | [`SkillCreateForm.tsx`](../../../../../src/features/skill/createSkill/ui/SkillCreateForm/SkillCreateForm.tsx) + `FormField` в [`SkillForm.tsx`](../../../../../src/entities/skill/ui/SkillForm/SkillForm.tsx) |
 | Адаптив | `useScreenSize` из `@/shared/libs` + `@media` ближайшего module той же фичи |
 
-## 1. Таблица с фильтрами (канон YEAHUB)
+## 1. Таблица с фильтрами
 
 Страница **собирает** оболочку. Таблицу и фильтры не реализуй заново на page.
 
@@ -102,13 +102,13 @@ return (
 - На запрос «админ-таблица с фильтрами» бери `UsersTablePage`, не wiki. Wiki / каталог — раздел ниже.
 - `TableMobile` **не канон**. Компонент есть в `shared/ui`, страницы его **не** импортируют. Не подключай его «для мобилки».
 
-### Другой стек (не YEAHUB)
+### Другой стек
 
 Тот же состав по смыслу: page shell → колонка `main` с `gap` → search/filter bar проекта → карточка → таблица. Фильтры не выноси сиблингом таблицы, если в проекте бар уже умеет drawer. Синтаксис — стек репозитория, не сниппет ниже «на всякий случай».
 
 ## 1.1 Wiki / каталог (колонка фильтров)
 
-Эталон: [`QuestionsPage.tsx`](../../../../src/pages/wiki/question/questions/ui/QuestionsPage/QuestionsPage.tsx). Похожие layouts есть у wiki `CollectionsPage` / `ResourcesPage` и у отдельной зоны `TasksPage`, но их брейкпоинты различаются. Это **не** админ-таблица: `SearchSection` сюда не тащи.
+Эталон: [`QuestionsPage.tsx`](../../../../../src/pages/wiki/question/questions/ui/QuestionsPage/QuestionsPage.tsx). Похожие layouts есть у wiki `CollectionsPage` / `ResourcesPage` и у отдельной зоны `TasksPage`, но их брейкпоинты различаются. Это **не** админ-таблица: `SearchSection` сюда не тащи.
 
 Состав:
 
@@ -197,19 +197,15 @@ return (
 
 ## 3. Форма: `Flex` + `Card` + `FormField`
 
-Эталон — `SkillCreateForm` (оболочка) + `SkillForm` (поля).
+Эталон оболочки — `SkillCreateForm` (колонка + `Card`) + `SkillForm` (поля через `FormField`). `FormProvider`, resolver, `useForm` и `handleSubmit` **не** канон вёрстки — form state, validation, submit и array fields веди в [`frontend-forms`](../../frontend-forms/SKILL.md).
 
 ```tsx
-<FormProvider {...methods}>
-  <LeavingPageBlocker isBlocked={isDirty && !isSubmitted && !isSubmitting}>
-    <Flex componentType="main" direction="column" gap="24">
-      <SkillCreateFormHeader />
-      <Card className={styles.content}>
-        <SkillForm />
-      </Card>
-    </Flex>
-  </LeavingPageBlocker>
-</FormProvider>
+<Flex componentType="main" direction="column" gap="24">
+  <SkillCreateFormHeader />
+  <Card className={styles.content}>
+    <SkillForm />
+  </Card>
+</Flex>
 ```
 
 Поле — `FormField` (лейбл + описание) и контрол внутри, не «голый» `Input` без подписи:
@@ -217,9 +213,7 @@ return (
 ```tsx
 <Flex direction="column" gap="60">
   <FormField label={t(Skills.TITLE_FULL)} description={t(Skills.TITLE_LABEL)}>
-    <FormControl name="title" control={control} className={styles['input-form']}>
-      {(register, hasError) => <Input {...register} error={hasError} />}
-    </FormControl>
+    <Input className={styles['input-form']} />
   </FormField>
 </Flex>
 ```
@@ -230,7 +224,7 @@ return (
 
 ### Другой стек
 
-Колонка с `gap`, поля через Form-примитив проекта, не `placeholder` вместо label. Синтаксис колонки — как у соседей, не обязательно Tailwind.
+Колонка с `gap`, поля через Form-примитив проекта, не `placeholder` вместо label. Синтаксис колонки — как у соседей, не обязательно Tailwind. Form state и submit — не этот файл.
 
 ## 4. Page shell
 

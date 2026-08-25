@@ -1,0 +1,17 @@
+---
+description: "Use only when the user explicitly asks for a frontend/client source-to-sink security audit (DOM XSS, unsafe URL, postMessage, client tokens, public env, XSS/unsafe field preview). Skip generic «is this secure?», pre-deploy/OWASP, CSP headers, server auth, CSRF, SQL/command injection, infra, and dependency CVEs — those are aif-security-checklist. Skip ordinary form validation and submit — those are frontend-forms, not a reason to start an audit. Do not start an audit just because a ts/tsx file is open."
+globs: "**/index.html,**/*.{html,vue,svelte},**/{sw,service-worker,serviceWorker}.{js,ts},**/*.worker.{js,ts},**/{vite,vitest,webpack,rspack,rollup,esbuild,next,nuxt,svelte,astro,remix,angular}.config.*"
+alwaysApply: false
+---
+
+# Frontend security
+
+Это правило **не** смешивает безопасность с вёрсткой, архитектурой или поведением формы. Открытие обычного `ts`/`tsx` или задача про layout / module boundaries / validation / submit **не** запускает аудит.
+
+Если пользователь **явно** не просил аудит клиентской части (XSS/sinks в браузере, public env, токены в клиенте, client-only authorization, XSS/unsafe preview поля) — **не** читай скил и не применяй его правила. Generic «надежно ли это?», pre-deploy / OWASP, CSP-заголовки, серверная auth, CSRF, SQL/command injection, rate limiting, инфраструктура и CVE зависимостей — зона `aif-security-checklist`. Обычная валидация и submit формы — зона `frontend-forms`, не этого правила.
+
+Перед явным frontend/client security audit сначала прочитай полный скил целиком:
+
+`.cursor/skills/frontend/frontend-security/SKILL.md`
+
+Правила аудита не дублируй здесь — следуй скилу. Файлы не меняй.
