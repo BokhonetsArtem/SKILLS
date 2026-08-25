@@ -43,7 +43,7 @@ Framework-managed submit (`action`, route/server action, `useActionState`) то�
 
 На время запроса кнопка `disabled={isSubmitting || isLoading}` (или эквивалент зоны). Для операций, где повтор особенно опасен, опирайся также на синхронный in-flight guard и/или серверную идемпотентность: обновление React-state и `disabled` само по себе не гарантирует блокировку двух событий в одном tick.
 
-Не вызывай мутацию и `handleSubmit` дважды (ещё и из `onClick`, и из `onSubmit`). Не игнорируй rejected promise: общая ошибка — toast/status формы; ошибка поля — `setError` / `setFieldError` ([validation-and-types.md](validation-and-types.md)).
+Не вызывай мутацию и `handleSubmit` дважды (ещё и из `onClick`, и из `onSubmit`). Саму mutation и нормализацию HTTP-ошибки не описывай здесь — [`frontend-api`](../../frontend-api/SKILL.md). Этот скил вызывает уже существующую mutation на submit, держит pending и применяет field errors: общая ошибка — toast/status формы; ошибка поля — `setError` / `setFieldError` ([validation-and-types.md](validation-and-types.md)).
 
 Успех: редирект, toast success, `reset` — как у соседней мутации той же зоны, не новый глобальный event-bus. Значения полей, пароли и PII не логируй.
 

@@ -13,6 +13,7 @@
 | Сетка полей, CSS, Flex/Grid, макет Figma, «сверстай форму» | `frontend-layout` |
 | Фильтры, поиск и аналогичные query/URL-оболочки без form state и submit сущности | `frontend-layout` |
 | Куда класть слайс, schema-файл, кто владеет state | `frontend-architecture` |
+| Endpoint, query/mutation, нормализация ошибок HTTP, без form binding | [`frontend-api`](../../frontend-api/SKILL.md) |
 | XSS, unsafe preview, секреты в поле | `frontend-security` |
 
 ## 2. Признаки трека

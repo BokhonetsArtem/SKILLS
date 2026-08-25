@@ -7,7 +7,7 @@
 - FSD-правила (слои, `@x`, query в entity / mutation в feature) **не** универсальны. Читай только раздел своего трека внутри пары.
 - Логи (`console.log`, обвязка логгера) в эти примеры **не** добавляй.
 
-Трек ещё не выбран — [principles-and-discovery.md](principles-and-discovery.md), сверка [evaluation.md](evaluation.md), затем спроси. Слои — [architecture-tracks.md](architecture-tracks.md). Фасады — [boundaries-and-imports.md](boundaries-and-imports.md). State/API — [state-api-and-effects.md](state-api-and-effects.md).
+Трек ещё не выбран — [principles-and-discovery.md](principles-and-discovery.md), сверка [evaluation.md](evaluation.md), затем спроси. Слои — [architecture-tracks.md](architecture-tracks.md). Фасады — [boundaries-and-imports.md](boundaries-and-imports.md). Куда класть state/API — [state-api-and-effects.md](state-api-and-effects.md). Как писать HTTP-клиент, query/mutation, cache и retry — [`frontend-api`](../../frontend-api/SKILL.md); HOW транспорта в эти примеры не копируй.
 
 ## 1. Куда класть новый код
 
@@ -658,29 +658,14 @@ store/index.ts  →  things, filters, drawer, form, session
 
 ## 9. Владелец API: query vs mutation
 
-**Отдельная пара.** Сплит «query в entity / mutation в feature» — правило **FSD-репозиториев, где так уже сделано**. На feature-module, layered и domain его **не** внедряй.
+**Отдельная пара.** Сплит «query в entity / mutation в feature» — правило **FSD-репозиториев, где так уже сделано**. На feature-module, layered и domain его **не** внедряй. Этот раздел — только **куда** класть файлы. Как писать query/mutation, tags, invalidation и retry — [`frontend-api`](../../frontend-api/SKILL.md).
 
 ### FSD (только если аналоги так делают)
 
 ```
 # надо
-entities/thing/api/thingApi.ts
-  build.query + providesTags
-
-features/thing/createThing/api/createThingApi.ts
-  build.mutation + invalidatesTags + onQueryStarted
-```
-
-```ts
-// надо — чтение у сущности
-getThingList: build.query({ query: ..., providesTags: [Tags.THINGS] });
-
-// надо — запись у сценария
-createThing: build.mutation({
-  query: ...,
-  invalidatesTags: [Tags.THINGS],
-  async onQueryStarted(_, { queryFulfilled, extra }) { /* навигация, toast — как у соседа */ },
-});
+entities/thing/api/thingApi.ts                 ← query чтения
+features/thing/createThing/api/createThingApi.ts  ← mutation сценария
 ```
 
 ```
@@ -690,9 +675,9 @@ features/thing/createThing/        →  getThingList query
 shared/api/thingApi.ts             →  и query, и mutation
 ```
 
-**Почему.** Чтение и теги кэша принадлежат сущности; изменение и side effect — сценарию. Смешение в entity раздувает её; query в feature дублирует справочник.
+**Почему.** Чтение принадлежит сущности; изменение и side effect — сценарию. Смешение в entity раздувает её; query в feature дублирует справочник.
 
-**Как исправить.** Перенеси query в entity API, mutation в feature API, оба через существующий `baseApi`/клиент репо. Не копируй `@/shared/config` и `ApiTags` в чужой проект.
+**Как исправить.** Перенеси query в entity API, mutation в feature API, оба через существующий `baseApi`/клиент репо. Не копируй `@/shared/config` и имена тегов в чужой проект. HOW клиента и invalidation — [`frontend-api`](../../frontend-api/SKILL.md).
 
 ### Feature / module — не вынимай entity API
 
@@ -709,7 +694,7 @@ src/features/thing/createThing/api.ts
 
 **Почему.** Нет слоя entities — некуда вынимать query. Сплит создаст второй стиль.
 
-**Как исправить.** Оставь query и mutation в фиче. Общий HTTP-клиент — там, где он уже лежит (`shared/api`, `lib/http`).
+**Как исправить.** Оставь query и mutation в фиче. Общий HTTP-клиент — там, где он уже лежит (`shared/api`, `lib/http`). HOW транспорта — [`frontend-api`](../../frontend-api/SKILL.md).
 
 ### Layered
 
@@ -727,7 +712,7 @@ thing/data/thingApi.ts + thing/application/createThing.ts
 
 **Почему.** В layered нет слоя entities и нет application. Сплит FSD или переезд в Domain — второй стиль.
 
-**Как исправить.** Оставь query и mutation в сервисе/хуке. Общий HTTP-клиент — там, где он уже лежит.
+**Как исправить.** Оставь query и mutation в сервисе/хуке. Общий HTTP-клиент — там, где он уже лежит. HOW транспорта — [`frontend-api`](../../frontend-api/SKILL.md).
 
 ### Domain — data + application, не FSD-сплит
 
@@ -746,7 +731,7 @@ src/features/thing/createThing/api.ts
 
 **Почему.** Запросы — infrastructure/data; оркестрация — application. Имена FSD здесь чужие.
 
-**Как исправить.** Не создавай `entities/` / `features/`. UI вызывает application, application — порт data.
+**Как исправить.** Не создавай `entities/` / `features/`. UI вызывает application, application — порт data. HOW HTTP — [`frontend-api`](../../frontend-api/SKILL.md).
 
 ---
 

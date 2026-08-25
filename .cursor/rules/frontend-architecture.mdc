@@ -1,12 +1,12 @@
 ---
-description: "Use when placing frontend modules, public API, imports, or refactoring structure (including where form state lives). Skip for layout, CSS, Figma, and .ai-factory/ARCHITECTURE.md. Skip field behavior, validation, and submit — those are frontend-forms. Do not impose FSD or a second architecture/state stack unless the repo already uses it."
+description: "Use when placing frontend modules, public API, imports, or refactoring structure (including where form/API state lives). Skip for layout, CSS, Figma, and .ai-factory/ARCHITECTURE.md. Skip HTTP client, endpoint, cache, retry HOW — those are frontend-api. Skip field behavior, validation, and submit — those are frontend-forms. Do not impose FSD or a second architecture/state stack unless the repo already uses it."
 globs: "**/*.{ts,tsx}"
 alwaysApply: false
 ---
 
 # Frontend architecture
 
-Если задача не про архитектуру frontend-кода (размещение слайса/модуля, границы, public API, импорты, циклы, ownership state/API включая куда класть form state, реорганизация структуры) — **не** читай скил и не применяй его правила. Вёрстка, CSS, Figma и генерация `.ai-factory/ARCHITECTURE.md` этому скилу не принадлежат. Поведение полей, validation и submit — `frontend-forms`; этот скил оставляет только размещение и владельца form state.
+Если задача не про архитектуру frontend-кода (размещение слайса/модуля, границы, public API, импорты, циклы, ownership state/API включая куда класть form state, реорганизация структуры) — **не** читай скил и не применяй его правила. Вёрстка, CSS, Figma и генерация `.ai-factory/ARCHITECTURE.md` этому скилу не принадлежат. HTTP-клиент, endpoint, DTO mapping, cache и retry — `frontend-api`; этот скил оставляет только куда класть API-модуль и кто владеет state. Поведение полей, validation и submit — `frontend-forms`; этот скил оставляет только размещение и владельца form state.
 
 Перед размещением frontend-кода или работой с границами модулей сначала прочитай полный скил целиком:
 

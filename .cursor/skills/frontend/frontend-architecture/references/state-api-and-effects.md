@@ -2,7 +2,7 @@
 
 Читай, когда нужно решить, **кто владеет** состоянием, куда класть query/mutation, клиент API и побочные эффекты. Библиотеку бери из репозитория. Не подставляй Redux, RTK Query, Zustand, TanStack Query, Pinia, MobX или второй клиент «для удобства», если его нет в проекте / в зоне уже другой.
 
-Трек (FSD / feature-module / layered / domain) уже выбран — этот файл не меняет слои, только владельца данных внутри них. Слои — [architecture-tracks.md](architecture-tracks.md). Фасады — [boundaries-and-imports.md](boundaries-and-imports.md).
+Трек (FSD / feature-module / layered / domain) уже выбран — этот файл не меняет слои, только владельца данных внутри них. Слои — [architecture-tracks.md](architecture-tracks.md). Фасады — [boundaries-and-imports.md](boundaries-and-imports.md). **Как** писать HTTP-клиент, DTO, cache, retry, abort и нормализацию ошибок — [`frontend-api`](../../frontend-api/SKILL.md); правила транспорта сюда не копируй.
 
 Логирование в state/API **не** добавляй, если план/репо этого не требуют.
 
@@ -24,15 +24,15 @@
 
 ## 2. API: клиент, query, mutation
 
-Базовый HTTP/клиент (axios instance, `baseApi`, `fetcher`) — там, где он уже лежит (часто shared/lib/platform). Новый экземпляр клиента не заводи, если есть один.
+Базовый HTTP/клиент (axios instance, `baseApi`, `fetcher`) — там, где он уже лежит (часто shared/lib/platform). Новый экземпляр клиента не заводи, если есть один. Настройка транспорта, headers, retry и cache этого клиента — [`frontend-api`](../../frontend-api/SKILL.md).
 
 Эндпоинты и хуки клади **как аналог того же типа** в зоне, не как «правильный FSD из статьи».
 
 Универсальные эвристики (отменяй, если соседи иначе):
 
-- **Чтение справочника / сущности** (список, by id, теги кэша) — рядом с владельцем сущности или ресурса.
+- **Чтение справочника / сущности** (список, by id) — рядом с владельцем сущности или ресурса.
 - **Сценарий изменения** (создать, удалить, submit формы) — рядом с фичей/use-case, который это делает, не в UI-ките.
-- Инвалидация кэша и optimistic update — у мутации-сценария, если аналоги так делают; не размазывай `onQueryStarted` / `invalidateQueries` по shared-кнопке.
+- Инвалидация кэша и optimistic update **принадлежат** мутации-сценария, если аналоги так делают; не клади их в shared-кнопку. Как писать invalidation/retry — [`frontend-api`](../../frontend-api/SKILL.md).
 
 ```
 # иллюстрация, не канон чужого репо
@@ -65,7 +65,7 @@ shared/api/             → base client, если он уже там
 
 ## 4. Побочные эффекты
 
-Эффект (toast, навигация после submit, analytics, запись в storage, инвалидация) принадлежит **сценарию**, который его вызвал — feature / use-case / page-handler, как у аналога.
+Эффект (toast, навигация после submit, analytics, запись в storage, инвалидация) принадлежит **сценарию**, который его вызвал — feature / use-case / page-handler, как у аналога. Когда эффект срабатывает относительно HTTP (только после confirmed result, rollback) — [`frontend-api`](../../frontend-api/SKILL.md).
 
 - Не прячь навигацию и refetch внутрь shared-кнопки или entity-карточки, если карточка в репо тупая.
 - Не дублируй один эффект в UI и в API-обвязке без образца.

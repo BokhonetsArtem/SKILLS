@@ -1,0 +1,17 @@
+---
+description: "Use when HTTP client, endpoint, query, mutation, DTO, cache, retry, abort, upload or download. Skip for placement/public API (frontend-architecture), form state/submit/field errors (frontend-forms), UI loading/error/empty (frontend-layout), and explicit token-storage audit (frontend-security). Do not start just because a ts/tsx file is open."
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Frontend API
+
+Если задача не про клиентский HTTP/REST/JSON (HTTP-клиент, endpoint, query/mutation, DTO, cache/invalidation, retry/abort, upload/download) — **не** читай скил и не применяй его правила. Открытый `ts`/`tsx` сам по себе не триггер.
+
+Размещение модуля, public API и owner state — `frontend-architecture`. Form state, submit binding и применение field errors — `frontend-forms`. UI loading/error/empty — `frontend-layout`. Явный source-to-sink аудит token storage / public env — `frontend-security`. Обычная настройка credentials/header/refresh по существующему контракту — этот скил, не аудит.
+
+Перед работой с HTTP-клиентом, endpoint, query/mutation или cache сначала прочитай полный скил целиком:
+
+`.cursor/skills/frontend/frontend-api/SKILL.md`
+
+Правила API не дублируй здесь — следуй скилу.

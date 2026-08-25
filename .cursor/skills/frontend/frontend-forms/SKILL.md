@@ -1,6 +1,6 @@
 ---
 name: frontend-forms
-description: Собирает поведение React-форм по стеку репозитория — form state, validation, field binding, submit/reset/errors, dynamic fields и form a11y. Use when form state, validation, валидация полей, field binding, submit, reset, ошибки полей, динамические поля или form-specific accessibility. Не для вёрстки, CSS, Figma (frontend-layout), размещения слайса или schema (frontend-architecture) и source-to-sink XSS (frontend-security). Не ставит вторую form/schema library и не перехватывает визуальную сетку полей без form state.
+description: Собирает поведение React-форм по стеку репозитория — form state, validation, field binding, submit/reset/errors, dynamic fields и form a11y. Use when form state, validation, валидация полей, field binding, submit, reset, ошибки полей, динамические поля или form-specific accessibility. Не для вёрстки, CSS, Figma (frontend-layout), размещения слайса или schema (frontend-architecture), endpoint/error normalization и вызова mutation (frontend-api) и source-to-sink XSS (frontend-security). Не ставит вторую form/schema library и не перехватывает визуальную сетку полей без form state.
 disable-model-invocation: false
 argument-hint: "[форма | валидация | submit]"
 ---
@@ -13,16 +13,17 @@ argument-hint: "[форма | валидация | submit]"
 
 Правила стека, валидации, полей и примеры **не копируй в этот файл**. Читай только нужный файл из `references/` (пути относительно этой папки скила). Примеры — **только выбранного трека**, не все `examples-*` сразу.
 
-**Не этот скил.** Вёрстка, CSS, токены, Flex/Grid, макет Figma, визуальная сетка полей без form state, фильтры и поиск на query/URL state — [`frontend-layout`](../frontend-layout/SKILL.md). Запрос вроде «сверстай форму» / «по макету» без validation/submit/field binding — тоже layout, этот скил дальше не веди. Куда класть файлы формы, schema и кто владеет form state — [`frontend-architecture`](../frontend-architecture/SKILL.md). XSS, unsafe preview, секреты в клиенте — [`frontend-security`](../frontend-security/SKILL.md), не повод начинать аудит из обычной валидации.
+**Не этот скил.** Вёрстка, CSS, токены, Flex/Grid, макет Figma, визуальная сетка полей без form state, фильтры и поиск на query/URL state — [`frontend-layout`](../frontend-layout/SKILL.md). Запрос вроде «сверстай форму» / «по макету» без validation/submit/field binding — тоже layout, этот скил дальше не веди. Куда класть файлы формы, schema и кто владеет form state — [`frontend-architecture`](../frontend-architecture/SKILL.md). Endpoint, query/mutation, нормализация ошибок HTTP — [`frontend-api`](../frontend-api/SKILL.md); этот скил применяет уже нормализованные field errors и ведёт form lifecycle. XSS, unsafe preview, секреты в клиенте — [`frontend-security`](../frontend-security/SKILL.md), не повод начинать аудит из обычной валидации.
 
 Маршруты (формулировка запроса → скил):
 
 - «сверстай форму / по макету» → [`frontend-layout`](../frontend-layout/SKILL.md)
 - «куда положить форму/schema» → [`frontend-architecture`](../frontend-architecture/SKILL.md)
+- «endpoint / mutation / нормализация ошибок» → [`frontend-api`](../frontend-api/SKILL.md)
 - «валидация / submit / array fields» → этот скил
 - «XSS / секреты / unsafe preview» → [`frontend-security`](../frontend-security/SKILL.md)
 
-Разведение: architecture — размещение и ownership; этот скил — поведение формы; layout — визуальная оболочка; security — отдельный source-to-sink аудит. Если задача сразу про **новый слайс и форму** — сначала размещение (architecture), затем поведение (здесь), затем оболочка (layout), если она нужна. Шаги не смешивай.
+Разведение: architecture — размещение и ownership; API — транспорт, mutation и нормализация ошибок; этот скил — поведение формы и применение field errors; layout — визуальная оболочка; security — отдельный source-to-sink аудит. Если задача сразу про **новый слайс и форму** — сначала размещение (architecture), затем HTTP-контракт ([`frontend-api`](../frontend-api/SKILL.md)), если нужен endpoint/mutation, затем поведение (здесь), затем оболочка (layout), если она нужна. Шаги не смешивай.
 
 **Режим** (не грузи лишнее):
 
@@ -47,9 +48,10 @@ argument-hint: "[форма | валидация | submit]"
 | Form state, schema, field binding, submit/reset, ошибки полей, array/nested fields, form a11y | Этот скил |
 | Только сетка/оболочка, CSS, Figma, «сверстай форму», фильтры/поиск без form state | [`frontend-layout`](../frontend-layout/SKILL.md) — остановись |
 | Куда положить форму, schema, слайс; кто владеет state | [`frontend-architecture`](../frontend-architecture/SKILL.md) — сначала размещение |
+| Endpoint, query/mutation, нормализация ошибок HTTP без form binding | [`frontend-api`](../frontend-api/SKILL.md) — не этот скил |
 | XSS / unsafe preview / секреты в поле | [`frontend-security`](../frontend-security/SKILL.md) — не этот скил |
 
-Несколько сигналов сразу — веди по самому широкому: сначала граница и владелец (architecture), потом поведение формы (здесь), потом визуал (layout).
+Несколько сигналов сразу — веди по самому широкому: сначала граница и владелец (architecture), потом HTTP-контракт (API), потом поведение формы (здесь), потом визуал (layout).
 
 ## Шаг 2. Обнаружь стек формы
 
@@ -96,7 +98,7 @@ argument-hint: "[форма | валидация | submit]"
 
 - значения полей живут в form state выбранной библиотеки (или native state), не дублируй всю форму в параллельный `useState` и не клади form state в глобальный store без прецедента;
 - валидация — schema ↔ form values ↔ API DTO; client validation не считать защитой сервера;
-- ошибки конкретного поля — через API трека (`setError` / Formik `errors`+`status`), не только toast;
+- ошибки конкретного поля — через API трека (`setError` / Formik `errors`+`status`), не только toast; нормализацию HTTP-ошибки не делай здесь — [`frontend-api`](../frontend-api/SKILL.md);
 - разметка — настоящий `<form onSubmit>` и кнопка `type="submit"` (Enter-submit); не заменяй это одним `Button.onClick={handleSubmit(...)}`, даже если так сделано в соседнем экране;
 - динамические списки — API трека (`useFieldArray` / `FieldArray`); в RHF React key — внутренний `field.id`, доменный id хранится отдельно, в остальных треках — stable id/helper, не индекс массива;
 - file/image: локальный preview в `useState` допустим, отправляемое значение — в form state через API выбранного трека (`setValue`, `Field`, локальный setter и т.п.).
@@ -114,7 +116,7 @@ argument-hint: "[форма | валидация | submit]"
 - **Трек.** Выбран уже доминирующий в зоне; новая form/schema library не установлена без явного запроса. Прочитан только examples своего трека.
 - **Семантика.** Нативный `<form onSubmit>`, кнопка `type="submit"`, Enter отправляет форму.
 - **a11y.** Label связан с контролом (`htmlFor`+`id`, не `htmlFor={name}`); `aria-invalid` / `aria-describedby`; ошибка объявляется; focus первой ошибки идёт в input (рабочий `ref`); placeholder не заменяет label.
-- **Ошибки.** Field-level server errors через API трека, не только toast. Тексты — через i18n, если он есть.
+- **Ошибки.** Field-level server errors через form-API трека (`setError` / `setFieldError`), не только toast. Нормализация HTTP-ошибки — [`frontend-api`](../frontend-api/SKILL.md). Тексты — через i18n, если он есть.
 - **Типы.** Form values и submit payload типизированы; schema не дублируется ручными проверками без причины.
 - **Lifecycle.** Default values / hydration для create и edit; reset и dirty/touched учтены; защита от повторного submit на время async mutation.
 - **Списки.** Ключ элемента — stable id, не индекс.
@@ -136,5 +138,6 @@ argument-hint: "[форма | валидация | submit]"
 - Пользователь не просил новую библиотеку → не добавляй `react-hook-form`, `formik`, `yup`, `zod` или resolver.
 - Нужна только визуальная сетка / макет / CSS → это [`frontend-layout`](../frontend-layout/SKILL.md), не этот скил.
 - Нужно только размещение слайса или schema → это [`frontend-architecture`](../frontend-architecture/SKILL.md), не этот скил.
+- Нужны endpoint, нормализация ошибок HTTP или вызов mutation без form binding → это [`frontend-api`](../frontend-api/SKILL.md), не этот скил.
 - Нужен XSS / unsafe preview / секреты → это [`frontend-security`](../frontend-security/SKILL.md), не этот скил.
 - В зоне submit через `onClick`, отброшенный `ref` или несвязанный label → не воспроизводи; good path в examples трека.

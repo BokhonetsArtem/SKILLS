@@ -1,6 +1,6 @@
 ---
 name: frontend-layout
-description: Верстает страницы и блоки UI по стеку репозитория — reuse примитивов, Flex/Grid, токены, сверка с макетом. Use when нужна вёрстка, layout, таблица/карточки, визуальная оболочка формы (сетка, FormField, CSS), стили UI или макет из Figma MCP / Bridge. Не для API, роутинга, задач только про тесты и правок без UI. Не для form state, validation, submit и array fields — это frontend-forms. Не добавляет CSS Modules, Tailwind, styled-components или UI-кит, если их нет в проекте.
+description: Верстает страницы и блоки UI по стеку репозитория — reuse примитивов, Flex/Grid, токены, сверка с макетом. Use when нужна вёрстка, layout, таблица/карточки, визуальная оболочка формы (сетка, FormField, CSS), стили UI или макет из Figma MCP / Bridge. Не для API, роутинга, задач только про тесты и правок без UI — HTTP/query без UI это frontend-api. Не для form state, validation, submit и array fields — это frontend-forms. Не добавляет CSS Modules, Tailwind, styled-components или UI-кит, если их нет в проекте.
 disable-model-invocation: false
 argument-hint: "[текст | Figma URL]"
 ---
@@ -13,7 +13,7 @@ argument-hint: "[текст | Figma URL]"
 
 Правила, треки и примеры **не копируй в этот файл**. Читай только нужный файл из `references/` (пути относительно этой папки скила).
 
-**Не этот скил.** API / RTK Query без UI, роутинг без вёрстки, задача только про тесты, рефактор модели. Размещение нового слайса/модуля/границы — зона [`frontend-architecture`](../frontend-architecture/SKILL.md); этот скил владеет стеком стилей, примитивами и Figma. Form state, validation, submit и array fields — [`frontend-forms`](../frontend-forms/SKILL.md); этот скил владеет визуальной оболочкой формы (сетка, `FormField`, CSS, Figma), не поведением полей. Если задача сразу про новый слайс и вёрстку — сначала размещение, затем стили. Если сразу про форму — размещение (architecture) → поведение ([`frontend-forms`](../frontend-forms/SKILL.md)) → оболочка (здесь), если она нужна. Проверка или обновление существующих stories / visual tests как часть UI-задачи допустимы. Если открыт `tsx`/`css`, но задача не про layout — не читай `references/` и не применяй правила вёрстки.
+**Не этот скил.** Клиентский HTTP/REST/JSON без UI (endpoint, query/mutation, cache) — [`frontend-api`](../frontend-api/SKILL.md). Роутинг без вёрстки, задача только про тесты, рефактор модели. Размещение нового слайса/модуля/границы — зона [`frontend-architecture`](../frontend-architecture/SKILL.md); этот скил владеет стеком стилей, примитивами и Figma. Form state, validation, submit и array fields — [`frontend-forms`](../frontend-forms/SKILL.md); этот скил владеет визуальной оболочкой формы (сетка, `FormField`, CSS, Figma), не поведением полей. Если задача сразу про новый слайс и вёрстку — сначала размещение, затем стили. Если сразу про форму — размещение (architecture) → HTTP-контракт ([`frontend-api`](../frontend-api/SKILL.md)), если нужен endpoint → поведение ([`frontend-forms`](../frontend-forms/SKILL.md)) → оболочка (здесь), если она нужна. Проверка или обновление существующих stories / visual tests как часть UI-задачи допустимы. Если открыт `tsx`/`css`, но задача не про layout — не читай `references/` и не применяй правила вёрстки.
 
 **Масштаб** (не грузи лишнее):
 
@@ -110,3 +110,4 @@ argument-hint: "[текст | Figma URL]"
 - Стек неясен → спроси. Не подставляй CSS Modules, Tailwind, styled-components или UI-кит наугад.
 - Примитив не найден → ищи соседние слои/папки **этого** репо, не копируй из другого проекта.
 - Нужны form state, validation, submit или array fields → это [`frontend-forms`](../frontend-forms/SKILL.md), не этот скил.
+- Нужен только HTTP-клиент, endpoint, query/mutation или cache без UI → это [`frontend-api`](../frontend-api/SKILL.md), не этот скил.
