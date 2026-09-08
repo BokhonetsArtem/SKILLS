@@ -1,6 +1,6 @@
 ---
 name: frontend-architecture
-description: Определяет архитектуру текущего frontend-проекта и размещает код — границы модулей, public API, зависимости, state/API, рефакторинг структуры. Use when новый слайс/модуль, куда класть код, границы feature/entity, импорты, циклы, ownership state/API (включая куда класть form state) или реорганизация frontend-структуры. Не для вёрстки, CSS, Figma и не для генерации .ai-factory/ARCHITECTURE.md. Не для HTTP-клиента, endpoint, DTO mapping, cache и retry — это frontend-api. Не для поведения полей, validation и submit — это frontend-forms. Не навязывает FSD и не добавляет второй архитектурный стиль или state manager, если их нет в репозитории.
+description: Определяет архитектуру текущего frontend-проекта и размещает код — границы модулей, public API, зависимости, state/API, рефакторинг структуры. Use when новый слайс/модуль, куда класть код, границы feature/entity, импорты, циклы, ownership state/API (включая куда класть form state) или реорганизация frontend-структуры. Не для вёрстки, CSS, Figma и не для генерации .ai-factory/ARCHITECTURE.md. Не для HTTP-клиента, endpoint, DTO mapping, cache и retry — это frontend-api. Не для поведения полей, validation и submit — это frontend-forms. Не для route tree, navigation, redirect и URL-state — это frontend-routing. Не навязывает FSD и не добавляет второй архитектурный стиль или state manager, если их нет в репозитории.
 disable-model-invocation: false
 argument-hint: "[слайс | модуль | рефакторинг]"
 ---
@@ -13,9 +13,9 @@ argument-hint: "[слайс | модуль | рефакторинг]"
 
 Правила треков, границ, state/API и примеры **не копируй в этот файл**. Читай только нужный файл из `references/` (пути относительно этой папки скила).
 
-**Не этот скил.** Вёрстка, CSS, токены, Flex/Grid, макет Figma — [`frontend-layout`](../frontend-layout/SKILL.md). HTTP-клиент, endpoint, DTO mapping, cache, retry, abort — [`frontend-api`](../frontend-api/SKILL.md); этот скил владеет только куда класть API-модуль и кто владеет state. Поведение полей, validation, submit и array fields — [`frontend-forms`](../frontend-forms/SKILL.md); этот скил владеет только размещением файлов формы/schema и тем, кто владеет form state. Стратегический документ `.ai-factory/ARCHITECTURE.md` — `aif-architecture`. Задача только про тесты, CI или инфраструктуру без структуры frontend-кода — остановись, `references/` не читай.
+**Не этот скил.** Вёрстка, CSS, токены, Flex/Grid, макет Figma — [`frontend-layout`](../frontend-layout/SKILL.md). HTTP-клиент, endpoint, DTO mapping, cache, retry, abort — [`frontend-api`](../frontend-api/SKILL.md); этот скил владеет только куда класть API-модуль и кто владеет state. Поведение полей, validation, submit и array fields — [`frontend-forms`](../frontend-forms/SKILL.md); этот скил владеет только размещением файлов формы/schema и тем, кто владеет form state. Route tree, navigation, redirect и URL-state — [`frontend-routing`](../frontend-routing/SKILL.md); этот скил владеет только куда класть page-модуль и public API. Стратегический документ `.ai-factory/ARCHITECTURE.md` — `aif-architecture`. Задача только про тесты, CI или инфраструктуру без структуры frontend-кода — остановись, `references/` не читай.
 
-Если задача сразу про **новый слайс и API** — сначала размещение (этот скил), затем HTTP-контракт ([`frontend-api`](../frontend-api/SKILL.md)), затем форма ([`frontend-forms`](../frontend-forms/SKILL.md)) и оболочка ([`frontend-layout`](../frontend-layout/SKILL.md)), если они нужны. Если сразу про **новый слайс/модуль и вёрстку** без API — сначала размещение, затем стили. Если сразу про **новый слайс и форму** — сначала размещение, затем поведение, затем оболочка, если она нужна. Не смешивай шаги и не переноси CSS-правила, HTTP HOW или form-binding сюда.
+Если задача сразу про **новый слайс и API** — сначала размещение (этот скил), затем HTTP-контракт ([`frontend-api`](../frontend-api/SKILL.md)), затем форма ([`frontend-forms`](../frontend-forms/SKILL.md)) и оболочка ([`frontend-layout`](../frontend-layout/SKILL.md)), если они нужны. Если сразу про **новый слайс и маршрут** — сначала размещение, затем декларация маршрута ([`frontend-routing`](../frontend-routing/SKILL.md)). Если сразу про **новый слайс/модуль и вёрстку** без API — сначала размещение, затем стили. Если сразу про **новый слайс и форму** — сначала размещение, затем поведение, затем оболочка, если она нужна. Не смешивай шаги и не переноси CSS-правила, HTTP HOW, form-binding или route tree сюда.
 
 **Режим** (не грузи лишнее):
 
@@ -41,8 +41,9 @@ argument-hint: "[слайс | модуль | рефакторинг]"
 | Перенос файлов, нарезка god-module, выравнивание legacy | Рефакторинг структуры |
 | Куда класть query/mutation, store, form state, side effects | Проектирование API / state flow |
 | HTTP-клиент, endpoint, DTO, cache, retry без новой границы | [`frontend-api`](../frontend-api/SKILL.md) — не этот скил |
+| Route tree, navigation, redirect, URL-state без новой границы | [`frontend-routing`](../frontend-routing/SKILL.md) — не этот скил |
 
-Несколько сигналов сразу — веди по самому широкому: сначала граница и владелец, потом HTTP-контракт ([`frontend-api`](../frontend-api/SKILL.md)), если нужен, потом перенос. Вёрстку на этом шаге не начинай.
+Несколько сигналов сразу — веди по самому широкому: сначала граница и владелец, потом маршрут ([`frontend-routing`](../frontend-routing/SKILL.md)), если нужен, потом HTTP-контракт ([`frontend-api`](../frontend-api/SKILL.md)), если нужен, потом перенос. Вёрстку на этом шаге не начинай.
 
 ## Шаг 2. Обнаружь архитектуру и enforcement
 
@@ -92,7 +93,7 @@ argument-hint: "[слайс | модуль | рефакторинг]"
 
 Не раздувай `shared`/common свалкой доменного UI и бизнес-логики. Не дроби модуль без причины, если аналог в этой зоне живёт крупнее. Не тащи доменный код на page/container, если в репо страница уже только композирует.
 
-После размещения, если нужен HTTP-контракт (endpoint, query/mutation, cache) — передай его в [`frontend-api`](../frontend-api/SKILL.md). Если нужна вёрстка экрана — передай её в [`frontend-layout`](../frontend-layout/SKILL.md). Если нужно поведение формы (validation, submit, array fields) — передай его в [`frontend-forms`](../frontend-forms/SKILL.md). Шаги не смешивай.
+После размещения, если нужна декларация маршрута / navigation / URL-state — передай её в [`frontend-routing`](../frontend-routing/SKILL.md). Если нужен HTTP-контракт (endpoint, query/mutation, cache) — передай его в [`frontend-api`](../frontend-api/SKILL.md). Если нужна вёрстка экрана — передай её в [`frontend-layout`](../frontend-layout/SKILL.md). Если нужно поведение формы (validation, submit, array fields) — передай его в [`frontend-forms`](../frontend-forms/SKILL.md). Шаги не смешивай.
 
 ## Шаг 5. Проверь зависимости и интеграцию
 
@@ -137,4 +138,5 @@ argument-hint: "[слайс | модуль | рефакторинг]"
 - Нужна только вёрстка без новой границы модуля → это [`frontend-layout`](../frontend-layout/SKILL.md), не этот скил.
 - Нужны HTTP-клиент, endpoint, cache или retry без новой границы → это [`frontend-api`](../frontend-api/SKILL.md), не этот скил.
 - Нужны validation, submit или array fields без новой границы → это [`frontend-forms`](../frontend-forms/SKILL.md), не этот скил.
+- Нужны route tree, navigation, redirect или URL-state без новой границы модуля → это [`frontend-routing`](../frontend-routing/SKILL.md), не этот скил.
 - Нужен стратегический документ архитектуры проекта → это `aif-architecture`, не этот скил.

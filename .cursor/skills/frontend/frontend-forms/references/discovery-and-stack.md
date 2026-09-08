@@ -11,7 +11,8 @@
 | Что видно | Куда |
 | --- | --- |
 | Сетка полей, CSS, Flex/Grid, макет Figma, «сверстай форму» | `frontend-layout` |
-| Фильтры, поиск и аналогичные query/URL-оболочки без form state и submit сущности | `frontend-layout` |
+| Фильтры, поиск и пагинация UI без записи в URL маршрута и без form state | `frontend-layout` |
+| Route tree, client redirect, params/search как URL-state маршрута | [`frontend-routing`](../../frontend-routing/SKILL.md) |
 | Куда класть слайс, schema-файл, кто владеет state | `frontend-architecture` |
 | Endpoint, query/mutation, нормализация ошибок HTTP, без form binding | [`frontend-api`](../../frontend-api/SKILL.md) |
 | XSS, unsafe preview, секреты в поле | `frontend-security` |

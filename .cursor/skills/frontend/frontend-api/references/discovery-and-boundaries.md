@@ -13,6 +13,7 @@
 | Куда класть модуль, public API, кто владеет server/client/form/session state | [`frontend-architecture`](../../frontend-architecture/SKILL.md) |
 | Form state, submit binding, применение field errors | [`frontend-forms`](../../frontend-forms/SKILL.md) |
 | UI loading / error / empty, скелетон, toast-вёрстка | [`frontend-layout`](../../frontend-layout/SKILL.md) |
+| Route tree, client navigation, redirect/replace, params/search как URL-state маршрута | [`frontend-routing`](../../frontend-routing/SKILL.md) |
 | Явный source-to-sink аудит token storage / public env / client token flow | [`frontend-security`](../../frontend-security/SKILL.md) |
 | Generic OWASP, server auth, CSRF, cookie flags, CVE | [`aif-security-checklist`](../../../aif-security-checklist/SKILL.md) |
 | GraphQL-клиент, `EventSource` / SSE, `WebSocket` / socket.io как транспорт | вне scope — §6; REST-рецепты не применяй |

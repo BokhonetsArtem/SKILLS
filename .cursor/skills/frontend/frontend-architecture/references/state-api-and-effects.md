@@ -65,7 +65,7 @@ shared/api/             → base client, если он уже там
 
 ## 4. Побочные эффекты
 
-Эффект (toast, навигация после submit, analytics, запись в storage, инвалидация) принадлежит **сценарию**, который его вызвал — feature / use-case / page-handler, как у аналога. Когда эффект срабатывает относительно HTTP (только после confirmed result, rollback) — [`frontend-api`](../../frontend-api/SKILL.md).
+Эффект (toast, навигация после submit, analytics, запись в storage, инвалидация) принадлежит **сценарию**, который его вызвал — feature / use-case / page-handler, как у аналога. Когда эффект срабатывает относительно HTTP (только после confirmed result, rollback) — [`frontend-api`](../../frontend-api/SKILL.md). Как писать client navigation / redirect / replace — [`frontend-routing`](../../frontend-routing/SKILL.md); здесь только **куда** класть эффект.
 
 - Не прячь навигацию и refetch внутрь shared-кнопки или entity-карточки, если карточка в репо тупая.
 - Не дублируй один эффект в UI и в API-обвязке без образца.

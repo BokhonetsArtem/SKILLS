@@ -56,7 +56,7 @@ Trusted Types object не доказывает безопасность сам �
 | Изображение/media: `img src` / `srcset`, video/audio/source | Не считай `javascript:` XSS: resource context его не исполняет. Флагь только доказанный privacy/network leak или подмену доверенного ресурса |
 | Framework binding: React `href={...}`, Vue `:href`, Svelte `href={}`, Angular `[href]` / `[src]` | Учитывай sanitizer/normalization конкретного стека и фактический DOM context |
 
-Роутер (`navigate`, `router.push`, `<Navigate to>`, `goto`) — open redirect только если attacker-controlled absolute/protocol-relative URL действительно уходит на внешний origin. Пользовательский внутренний path без allowlist сам по себе не находка. Серверный 302 — чеклист.
+Роутер (`navigate`, `router.push`, `<Navigate to>`, `goto`) — open redirect только если attacker-controlled absolute/protocol-relative URL действительно уходит на внешний origin. Пользовательский внутренний path без allowlist сам по себе не находка. Серверный 302 — чеклист. Обычная декларация маршрута и same-origin navigation без недоверенного URL — [`frontend-routing`](../../frontend-routing/SKILL.md), не этот файл.
 
 Allowlist проверяй через `URL`: exact `protocol` и `origin` (scheme + hostname + port), без `includes`/наивного suffix/prefix; отдельно проверяй credentials, protocol-relative URL и path после нормализации.
 

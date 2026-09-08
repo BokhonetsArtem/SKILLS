@@ -1,5 +1,5 @@
 ---
-description: "Use when form state, validation, field binding, or submit. Skip for layout, CSS, Figma (frontend-layout), slice or schema placement (frontend-architecture), endpoint/error normalization/mutation call (frontend-api), and source-to-sink XSS (frontend-security). Do not start just because a ts/tsx file is open."
+description: "Use when form state, validation, field binding, or submit. Skip for layout, CSS, Figma (frontend-layout), slice or schema placement (frontend-architecture), endpoint/error normalization/mutation call (frontend-api), route tree/navigation/URL-state (frontend-routing), and source-to-sink XSS (frontend-security). Do not start just because a ts/tsx file is open."
 globs: "**/*.{ts,tsx}"
 alwaysApply: false
 ---
@@ -8,7 +8,7 @@ alwaysApply: false
 
 Если задача не про form state, validation, field binding или submit — **не** читай скил и не применяй его правила. Открытый `tsx` сам по себе не триггер.
 
-Вёрстка, CSS, Figma и визуальная сетка полей без form state — `frontend-layout`. Размещение слайса или schema — `frontend-architecture`. Endpoint, нормализация ошибок HTTP и вызов mutation — `frontend-api`; этот скил применяет field errors и ведёт form lifecycle. XSS, секреты и unsafe preview — `frontend-security`.
+Вёрстка, CSS, Figma и визуальная сетка полей без form state — `frontend-layout`. Размещение слайса или schema — `frontend-architecture`. Endpoint, нормализация ошибок HTTP и вызов mutation — `frontend-api`; этот скил применяет field errors и ведёт form lifecycle. Route tree, client redirect и URL-state маршрута — `frontend-routing`; leave-guard грязной формы — этот скил. XSS, секреты и unsafe preview — `frontend-security`.
 
 Перед работой с поведением формы (валидация, field binding, submit, dynamic fields, form a11y) сначала прочитай полный скил целиком:
 

@@ -10,7 +10,8 @@ description: >-
   aif-security-checklist. Не для обычной настройки HTTP-клиента,
   credentials и refresh — это frontend-api, не повод начинать аудит.
   Не для обычной валидации и submit формы — это frontend-forms, не
-  повод начинать аудит. Не ставит пакеты и не открывает сырые
+  повод начинать аудит. Не для обычного route tree/navigation без
+  аудита — это frontend-routing. Не ставит пакеты и не открывает сырые
   secret-файлы.
 ---
 
@@ -20,7 +21,7 @@ description: >-
 
 Правила sinks, data/auth и evidence **не копируй в этот файл**. Читай только нужный файл из `references/` (пути относительно этой папки скила).
 
-**Не этот скил.** Generic «is this secure?», pre-deploy / OWASP-чеклист, CSP-заголовки, серверная auth, CSRF, SQL/command injection, rate limiting, инфраструктура, CVE зависимостей — [`aif-security-checklist`](../../aif-security-checklist/SKILL.md); `references/` не читай. Вёрстка — [`frontend-layout`](../frontend-layout/SKILL.md). Размещение модулей — [`frontend-architecture`](../frontend-architecture/SKILL.md). Обычная настройка HTTP-клиента, credentials, auth header и refresh по существующему контракту — [`frontend-api`](../frontend-api/SKILL.md), не повод начинать аудит. Обычная валидация и submit формы — [`frontend-forms`](../frontend-forms/SKILL.md), не повод начинать аудит. XSS / unsafe preview поля — этот скил.
+**Не этот скил.** Generic «is this secure?», pre-deploy / OWASP-чеклист, CSP-заголовки, серверная auth, CSRF, SQL/command injection, rate limiting, инфраструктура, CVE зависимостей — [`aif-security-checklist`](../../aif-security-checklist/SKILL.md); `references/` не читай. Вёрстка — [`frontend-layout`](../frontend-layout/SKILL.md). Размещение модулей — [`frontend-architecture`](../frontend-architecture/SKILL.md). Обычная настройка HTTP-клиента, credentials, auth header и refresh по существующему контракту — [`frontend-api`](../frontend-api/SKILL.md), не повод начинать аудит. Обычная валидация и submit формы — [`frontend-forms`](../frontend-forms/SKILL.md), не повод начинать аудит. Обычный route tree, navigation и same-origin redirect — [`frontend-routing`](../frontend-routing/SKILL.md), не повод начинать аудит. XSS / unsafe preview поля — этот скил.
 
 Пересечение (XSS, секреты в клиенте) **не** объявляй нулевым: этот скил владеет глубиной source-to-sink в браузерном/клиентском коде; чеклист — общей pre-deploy/OWASP-проверкой. Спорный сигнал без клиентского data flow отдай чеклисту, не дублируй его gate.
 
@@ -123,6 +124,7 @@ Scope пустой, только backend/infra или нет клиентско�
 - Запрос generic «надежно ли это?» / pre-deploy / OWASP → [`aif-security-checklist`](../../aif-security-checklist/SKILL.md), этот скил дальше не веди.
 - Обычная настройка HTTP-клиента / credentials / refresh без аудита token storage → [`frontend-api`](../frontend-api/SKILL.md), этот скил дальше не веди.
 - Обычная валидация / submit формы без XSS-аудита → [`frontend-forms`](../frontend-forms/SKILL.md), этот скил дальше не веди.
+- Обычный route tree / navigation / redirect без аудита open redirect или client-only auth → [`frontend-routing`](../frontend-routing/SKILL.md), этот скил дальше не веди.
 - Клиентское дерево не находится → спроси path; не сканируй весь монорепо наугад.
 - Стек смешанный → аудируй каждый найденный клиентский корень своим API; не унифицируй на React.
 - Находка только серверная → не флагь как frontend FAIL; отдай в чеклист.

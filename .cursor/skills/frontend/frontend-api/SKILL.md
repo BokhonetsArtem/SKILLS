@@ -1,6 +1,6 @@
 ---
 name: frontend-api
-description: Реализует или изменяет клиентский HTTP/REST по фактическому transport и server-state стеку зоны — client, endpoint, query/mutation, DTO, cache, retry/abort, upload/download. Use when implementing or changing an HTTP client, endpoint, query, mutation, DTO mapping, cache invalidation, retry, abort, upload or download. Не для placement/public API/owner state, form binding, UI-состояний, security-аудита, GraphQL, SSE или WebSocket. Не ставит второй клиент без новой transport/auth/origin границы.
+description: Реализует или изменяет клиентский HTTP/REST по фактическому transport и server-state стеку зоны — client, endpoint, query/mutation, DTO, cache, retry/abort, upload/download. Use when implementing or changing an HTTP client, endpoint, query, mutation, DTO mapping, cache invalidation, retry, abort, upload or download. Не для placement/public API/owner state, form binding, UI-состояний, security-аудита, GraphQL, SSE или WebSocket. Не для route tree, client navigation и URL-state маршрута — это frontend-routing. Не ставит второй клиент без новой transport/auth/origin границы.
 argument-hint: "[endpoint | query | mutation]"
 ---
 
@@ -16,6 +16,7 @@ argument-hint: "[endpoint | query | mutation]"
 
 - «куда положить API / кто владеет state» → [`frontend-architecture`](../frontend-architecture/SKILL.md)
 - «endpoint / query / mutation / DTO / cache / retry» → этот скил
+- «route tree / client redirect / params / URL-state» → [`frontend-routing`](../frontend-routing/SKILL.md)
 - «submit / field errors на форме» → [`frontend-forms`](../frontend-forms/SKILL.md)
 - «скелетон / toast / empty UI» → [`frontend-layout`](../frontend-layout/SKILL.md)
 - «аудит хранения токена / public env» → [`frontend-security`](../frontend-security/SKILL.md)
@@ -133,4 +134,5 @@ Optimistic update, infinite query, SSR loaders и codegen — не default: то
 - Нет аналога → ищи соседний HTTP/query этого репо; чужие импорты и alias не копируй.
 - Пользователь не просил новый слой → не добавляй второй client/query cache и не ставь codegen.
 - Scope ушёл в соседнюю область → вернись к routing-таблице; GraphQL/SSE/WebSocket не конвертируй в REST.
+- Client navigation / route tree / URL-state без HTTP-контракта → [`frontend-routing`](../frontend-routing/SKILL.md), не этот скил.
 - Пользователь не просил сменить token storage → не выбирай и не переноси `localStorage`, cookie или иной storage.

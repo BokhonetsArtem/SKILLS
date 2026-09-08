@@ -20,6 +20,8 @@ Edit: гидрация из сущности в **form values**, не сырой
 
 Не блокируй уход, когда мутация ещё идёт и пользователь уже подтвердил save — отсюда исключение `isSubmitting` / `isSubmitted`. Не ставь guard на экраны без dirty-смысла (логин), если соседи его там нет.
 
+Leave-guard грязной формы — этот файл. Route guard (redirect неавторизованного, 404) и URL-state маршрута — [`frontend-routing`](../../frontend-routing/SKILL.md); не подменяй blocker формой auth.
+
 ## 3. Настоящий submit: `<form>` + `type="submit"`
 
 Форма отправляется нативным submit: Enter в текстовом поле и клик по кнопке срабатывают одинаково.

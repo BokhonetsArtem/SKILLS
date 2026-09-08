@@ -1,12 +1,12 @@
 ---
-description: "Use when laying out UI or Figma mockups (including the visual shell of a form: grid, FormField, CSS). Skip for HTTP/REST API (frontend-api), routing, test-only, or non-UI work. Skip form state, validation, and submit — those are frontend-forms, not this layout rule. Do not add a styling stack or UI kit unless the repo already uses it."
+description: "Use when laying out UI or Figma mockups (including the visual shell of a form: grid, FormField, CSS). Skip for HTTP/REST API (frontend-api), client routing (frontend-routing), test-only, or non-UI work. Skip form state, validation, and submit — those are frontend-forms, not this layout rule. Do not add a styling stack or UI kit unless the repo already uses it."
 globs: "**/*.{tsx,css}"
 alwaysApply: false
 ---
 
 # Frontend layout
 
-Если задача не про вёрстку, стили, UI-layout или макет Figma (только API, тесты, роутинг, модель) — **не** читай скил и не применяй его правила. HTTP-клиент, endpoint, query/mutation и cache без UI — зона `frontend-api`, не этого правила. Размещение нового слайса/модуля/границы — зона `frontend-architecture`; layout по-прежнему владеет стеком стилей, примитивами и Figma. Form state, validation, submit и array fields — зона `frontend-forms`; это правило владеет только визуальной оболочкой формы, не поведением полей. Проверка существующих stories / visual tests как часть UI-задачи этому не мешает.
+Если задача не про вёрстку, стили, UI-layout или макет Figma (только API, тесты, роутинг, модель) — **не** читай скил и не применяй его правила. HTTP-клиент, endpoint, query/mutation и cache без UI — зона `frontend-api`, не этого правила. Route tree, navigation, redirect и URL-state без вёрстки — зона `frontend-routing`; обычный поиск или фильтр без записи в URL маршрута остаётся здесь. Размещение нового слайса/модуля/границы — зона `frontend-architecture`; layout по-прежнему владеет стеком стилей, примитивами и Figma. Form state, validation, submit и array fields — зона `frontend-forms`; это правило владеет только визуальной оболочкой формы, не поведением полей. Проверка существующих stories / visual tests как часть UI-задачи этому не мешает.
 
 Перед вёрсткой UI или работой с макетом Figma сначала прочитай полный скил целиком:
 
