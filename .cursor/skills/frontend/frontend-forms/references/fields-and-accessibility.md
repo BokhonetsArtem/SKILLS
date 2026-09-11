@@ -1,6 +1,6 @@
 # Поля и доступность
 
-Читай, когда нужны label, связь с контролом, ошибки для AT, focus, checkbox/radio/select/file. Стек — [discovery-and-stack.md](discovery-and-stack.md). Submit и массивы — [lifecycle-and-submit.md](lifecycle-and-submit.md). Визуальная сетка подписи и контрола — `frontend-layout`; здесь — поведение и a11y формы.
+Читай, когда нужны label, связь с контролом, ошибки для AT, focus, checkbox/radio/select/file. Стек — [discovery-and-stack.md](discovery-and-stack.md). Submit и массивы — [lifecycle-and-submit.md](lifecycle-and-submit.md). Визуальная сетка подписи и контрола — `frontend-layout`; здесь — поведение и a11y формы. Системный a11y/WCAG-аудит («проверь доступность», не реализация формы) — [`frontend-a11y`](../../frontend-a11y/SKILL.md).
 
 Примитивы зоны переиспользуй, параллельный кит не заводи. Их локальные дыры **не копируй** (§6).
 

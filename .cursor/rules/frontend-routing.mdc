@@ -1,14 +1,14 @@
 ---
-description: "Use when route tree, navigation, redirect/replace, params/search, URL-state, nested layouts, or framework middleware/proxy. Skip HTTP redirect/endpoint params (frontend-api), ordinary search without URL-state (frontend-layout), placement/public API (frontend-architecture), form leave-guard (frontend-forms), and open redirect/client-only auth audit (frontend-security). Do not start just because a ts/tsx file is open."
+description: "Use when route tree, navigation, redirect/replace, params/search, URL-state, nested layouts, or framework middleware/proxy. Skip HTTP redirect/endpoint params (frontend-api), ordinary search without URL-state (frontend-layout), placement/public API (frontend-architecture), form leave-guard (frontend-forms), and open redirect/client-only auth audit (frontend-security). Skip systemic a11y/WCAG audit — that is frontend-a11y; scroll/focus/title while working on a route stay here. Do not start just because a ts/tsx file is open."
 globs: "**/*.{ts,tsx}"
 alwaysApply: false
 ---
 
 # Frontend routing
 
-Если задача не про клиентскую маршрутизацию (route tree, navigation, redirect/replace, params/search, URL-state маршрута, nested layouts, framework middleware или proxy) — **не** читай скил и не применяй его правила. Открытый `ts`/`tsx` сам по себе не триггер. Папка FSD `src/pages` без Next `_app` / GSSP и без router API — не evidence. HTTP 3xx / `Location` / params **endpoint** — `frontend-api`. Обычный поиск или фильтр без записи в URL маршрута — `frontend-layout`. Простой `<a>` без смены route behavior — не этот скил.
+Если задача не про клиентскую маршрутизацию (route tree, navigation, redirect/replace, params/search, URL-state маршрута, nested layouts, framework middleware или proxy) — **не** читай скил и не применяй его правила. Открытый `ts`/`tsx` сам по себе не триггер. Папка FSD `src/pages` без Next `_app` / GSSP и без router API — не evidence. HTTP 3xx / `Location` / params **endpoint** — `frontend-api`. Обычный поиск или фильтр без записи в URL маршрута — `frontend-layout`. Простой `<a>` без смены route behavior — не этот скил. Явный системный a11y/WCAG-аудит («проверь доступность») без работы над маршрутом — не этот скил.
 
-Размещение page-модуля и public API — `frontend-architecture`. Leave-guard грязной формы — `frontend-forms`. Вёрстка экрана / skeleton / CSS nested layout — `frontend-layout`. Open redirect и выдача client guard за authorization — `frontend-security`, не повод начинать аудит из обычной навигации.
+Размещение page-модуля и public API — `frontend-architecture`. Leave-guard грязной формы — `frontend-forms`. Вёрстка экрана / skeleton / CSS nested layout — `frontend-layout`. Open redirect и выдача client guard за authorization — `frontend-security`, не повод начинать аудит из обычной навигации. Системный a11y-аудит / WCAG — `frontend-a11y`; scroll / focus / title после client navigation при работе над маршрутом остаются здесь.
 
 Перед работой с route tree, navigation, redirect, params/search или framework middleware/proxy сначала прочитай полный скил целиком:
 

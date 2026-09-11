@@ -96,7 +96,7 @@ Guard на клиенте:
 
 ## 7. Route-transition UX и доступность
 
-После **client** navigation (не полной перезагрузки) восстанови контекст чтения. Визуал — layout; поведение ниже — этот скил.
+После **client** navigation (не полной перезагрузки) восстанови контекст чтения. Визуал — layout; поведение ниже — этот скил. Системный a11y/WCAG-аудит — [`frontend-a11y`](../../frontend-a11y/SKILL.md); scroll / focus / title после client navigation при работе над маршрутом остаются здесь.
 
 **Scroll.** Восстанавливай по контракту зоны: `ScrollRestoration` (data/framework React Router), default Next App, ручной scroll-to-top на смене pathname, если так делают соседи. Deep link с hash — прокрути к цели, если зона это делает. Не скролль на каждый search-param, если меняется только фильтр того же экрана. Не оставляй пользователя внизу длинной страницы после перехода на новый экран.
 
@@ -117,5 +117,6 @@ Guard на клиенте:
 | Dirty form leave-guard, submit | [`frontend-forms`](../../frontend-forms/SKILL.md) |
 | Skeleton, CSS shell, сетка | [`frontend-layout`](../../frontend-layout/SKILL.md) |
 | Open redirect, client-only auth как «защита» | [`frontend-security`](../../frontend-security/SKILL.md) |
+| «проверь доступность» / WCAG / системный a11y | [`frontend-a11y`](../../frontend-a11y/SKILL.md) |
 
 Reuse **не** значит копировать дыры: hardcoded path drift, смешение relative/absolute children, blank loading gate, open redirect, client-only auth, `window.location` вместо router, server `redirect` из client-only модуля (и наоборот).

@@ -1,6 +1,6 @@
 # Frontend skills
 
-Сюда кладём **фронтовые** скилы: вёрстка, UI, стили, макеты, архитектура frontend-кода, клиентский HTTP/REST/JSON, клиентская маршрутизация, поведение форм, аудит клиентской безопасности.
+Сюда кладём **фронтовые** скилы: вёрстка, UI, стили, макеты, архитектура frontend-кода, клиентский HTTP/REST/JSON, клиентская маршрутизация, поведение форм, доступность, аудит клиентской безопасности.
 
 Процессные скилы AI Factory (`aif-*`) остаются в `.cursor/skills/` на верхнем уровне и сюда **не** переносятся.
 
@@ -17,6 +17,7 @@ Cursor рекурсивно обходит `.cursor/skills/` и подхваты
   - api (`ts`/`tsx`, только HTTP client/endpoint/query/mutation/cache): `.cursor/rules/frontend-api.mdc`
   - routing (`ts`/`tsx`, только route tree/navigation/redirect/params/search/framework middleware или proxy): `.cursor/rules/frontend-routing.mdc`
   - forms (`ts`/`tsx`, только form state/validation/submit): `.cursor/rules/frontend-forms.mdc`
+  - a11y (только явный a11y/WCAG/ARIA/keyboard/screen reader, не любой `tsx`/`html`): `.cursor/rules/frontend-a11y.mdc`
   - security (только явный frontend/client audit, не любой `ts`/`tsx`): `.cursor/rules/frontend-security.mdc`
 - Generic «is this secure?» / pre-deploy / OWASP — процессный `aif-security-checklist` в `.cursor/skills/`, не `frontend-security`
 - Стек стилей скил берёт из репозитория; CSS Modules и Tailwind не дефолт
@@ -30,4 +31,5 @@ Cursor рекурсивно обходит `.cursor/skills/` и подхваты
 | `frontend-api/` | Клиентский HTTP/REST/JSON по стеку зоны: client, endpoint, query/mutation, DTO, cache, retry. Правило: `.cursor/rules/frontend-api.mdc` |
 | `frontend-routing/` | Клиентская маршрутизация по стеку зоны: route tree, navigation, redirect, params/search, URL-state. Правило: `.cursor/rules/frontend-routing.mdc` |
 | `frontend-forms/` | Поведение React-форм по стеку зоны: state, validation, submit, errors, lifecycle и a11y. Правило: `.cursor/rules/frontend-forms.mdc` |
+| `frontend-a11y/` | Аудит и исправление доступности клиентского UI. Правило: `.cursor/rules/frontend-a11y.mdc` |
 | `frontend-security/` | Аудит клиентской части source-to-sink без правок кода. Правило: `.cursor/rules/frontend-security.mdc`. Generic OWASP / «надежно ли это?» — `aif-security-checklist` |

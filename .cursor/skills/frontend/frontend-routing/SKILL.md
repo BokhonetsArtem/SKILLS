@@ -1,6 +1,6 @@
 ---
 name: frontend-routing
-description: Реализует или изменяет клиентскую маршрутизацию по установленному router-стеку зоны — route tree, navigation, redirect/replace, params/search/hash, URL-state, nested layouts, 404/error/loading, guards. Use when route tree, router API, route-level URL state, framework routing convention, navigation, redirect, params, search, nested layouts, route guards, scroll/focus after navigation. Не для HTTP redirect/endpoint params, обычного поиска или фильтра без URL-state, простого <a> без изменения route behavior. Placement/public API — frontend-architecture; данные маршрута — frontend-api; leave guards формы — frontend-forms; экран/layout — frontend-layout; open redirect/client-only authorization — frontend-security. Не ставит второй роутер и не добавляет runtime-логи.
+description: Реализует или изменяет клиентскую маршрутизацию по установленному router-стеку зоны — route tree, navigation, redirect/replace, params/search/hash, URL-state, nested layouts, 404/error/loading, guards. Use when route tree, router API, route-level URL state, framework routing convention, navigation, redirect, params, search, nested layouts, route guards, scroll/focus after navigation. Не для HTTP redirect/endpoint params, обычного поиска или фильтра без URL-state, простого <a> без изменения route behavior. Placement/public API — frontend-architecture; данные маршрута — frontend-api; leave guards формы — frontend-forms; экран/layout — frontend-layout; open redirect/client-only authorization — frontend-security. Не для системного a11y-аудита / WCAG — это frontend-a11y. Не ставит второй роутер и не добавляет runtime-логи.
 disable-model-invocation: false
 argument-hint: "[маршрут | redirect | params]"
 ---
@@ -13,7 +13,7 @@ argument-hint: "[маршрут | redirect | params]"
 
 Правила треков, URL-state, guards и примеры **не копируй в этот файл**. Читай только нужный файл из `references/` (пути относительно этой папки скила). Примеры — **только выбранного трека**, не все `examples-*` сразу.
 
-**Не этот скил**, пока нет evidence маршрутизации (route tree, API установленного router, route-level URL-state или framework routing convention). HTTP 3xx / `Location` / params endpoint — [`frontend-api`](../frontend-api/SKILL.md). Обычный поиск или фильтр без записи в URL маршрута — [`frontend-layout`](../frontend-layout/SKILL.md). Простой `<a>` без изменения route behavior — не повод начинать этот скил. Куда класть page-модуль и public API — [`frontend-architecture`](../frontend-architecture/SKILL.md). Leave-guard грязной формы — [`frontend-forms`](../frontend-forms/SKILL.md); этот скил не владеет dirty/submit. Вёрстка экрана, skeleton, CSS nested layout — [`frontend-layout`](../frontend-layout/SKILL.md). Open redirect и выдача client guard за authorization — [`frontend-security`](../frontend-security/SKILL.md), не повод начинать аудит из обычной навигации.
+**Не этот скил**, пока нет evidence маршрутизации (route tree, API установленного router, route-level URL-state или framework routing convention). HTTP 3xx / `Location` / params endpoint — [`frontend-api`](../frontend-api/SKILL.md). Обычный поиск или фильтр без записи в URL маршрута — [`frontend-layout`](../frontend-layout/SKILL.md). Простой `<a>` без изменения route behavior — не повод начинать этот скил. Куда класть page-модуль и public API — [`frontend-architecture`](../frontend-architecture/SKILL.md). Leave-guard грязной формы — [`frontend-forms`](../frontend-forms/SKILL.md); этот скил не владеет dirty/submit. Вёрстка экрана, skeleton, CSS nested layout — [`frontend-layout`](../frontend-layout/SKILL.md). Open redirect и выдача client guard за authorization — [`frontend-security`](../frontend-security/SKILL.md), не повод начинать аудит из обычной навигации. Системный a11y-аудит / WCAG — [`frontend-a11y`](../frontend-a11y/SKILL.md); scroll / focus / title после client navigation при работе над маршрутом остаются здесь.
 
 Маршруты (формулировка запроса → скил):
 
@@ -22,6 +22,7 @@ argument-hint: "[маршрут | redirect | params]"
 - «loader/action ходит в HTTP / query / DTO / cache» → [`frontend-api`](../frontend-api/SKILL.md)
 - «dirty form / leave guard / submit» → [`frontend-forms`](../frontend-forms/SKILL.md)
 - «вёрстка экрана / skeleton / CSS layout» → [`frontend-layout`](../frontend-layout/SKILL.md)
+- «проверь доступность / WCAG / системный a11y-аудит» → [`frontend-a11y`](../frontend-a11y/SKILL.md)
 - «open redirect / client-only auth как защита» → [`frontend-security`](../frontend-security/SKILL.md)
 
 Разведение: architecture — размещение page-модуля и ownership; этот скил — декларация маршрута, URL-контракт и client navigation; API — загрузка данных маршрута; forms — leave-guard формы через уже принятый blocker API; layout — визуал; security — source-to-sink по URL/guard. Если задача сразу про **новый слайс и маршрут** — сначала размещение (architecture), затем маршрут (здесь), затем HTTP ([`frontend-api`](../frontend-api/SKILL.md)), если loader/page data нужны, затем оболочка (layout), если она нужна. Шаги не смешивай.
@@ -58,6 +59,7 @@ argument-hint: "[маршрут | redirect | params]"
 | Dirty form, confirm leave, `useBlocker` как часть form lifecycle | [`frontend-forms`](../frontend-forms/SKILL.md) — не этот скил |
 | CSS nested layout, skeleton, сетка экрана | [`frontend-layout`](../frontend-layout/SKILL.md) — не этот скил |
 | Аудит open redirect / client-only authorization | [`frontend-security`](../frontend-security/SKILL.md) — не этот скил |
+| «проверь доступность» / WCAG / системный a11y без работы над маршрутом | [`frontend-a11y`](../frontend-a11y/SKILL.md) — не этот скил |
 
 Открытый `ts`/`tsx` сам по себе не триггер. Имя файла `*Page*` или папки `app/` / `pages/` без router API и без framework convention — ещё не evidence. FSD-слой `src/pages` без Next `_app` / GSSP и без `createBrowserRouter` / `<Routes>` — не файловый роутер.
 
