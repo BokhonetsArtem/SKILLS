@@ -68,6 +68,8 @@ Infinite / `useInfiniteQuery` / `useSWRInfinite`:
 
 ## 6. SSR и framework loaders
 
+Нужна ли server-data граница и нет ли двойного fetch без контракта — [`frontend-ssr`](../../frontend-ssr/SKILL.md); здесь — HOW `dehydrate` / query keys / loader fetch, не решение render-mode.
+
 Только если зона уже грузит данные в `loader`, RSC, server action или аналоге:
 
 - не дублируй тот же GET и в loader, и в client query без принятой гидрации (`dehydrate` / initial data / framework cache);

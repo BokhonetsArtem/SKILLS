@@ -10,7 +10,8 @@ description: >-
   frontend-layout. Не для route tree, navigation и URL-state — это
   frontend-routing. Не для XSS / unsafe HTML / preview — это
   frontend-security. Не для размещения слайса — это
-  frontend-architecture. Не ставит axe, pa11y, Lighthouse или второй набор
+  frontend-architecture. Не для SSR/RSC/hydration и решения render-mode —
+  это frontend-ssr. Не ставит axe, pa11y, Lighthouse или второй набор
   UI-примитивов.
 disable-model-invocation: false
 argument-hint: "[аудит | исправить | scope]"
@@ -24,7 +25,7 @@ argument-hint: "[аудит | исправить | scope]"
 
 Правила категорий, evidence и примеры **не копируй в этот файл**. Читай только нужный файл из `references/` (пути относительно этой папки скила).
 
-**Не этот скил.** Form lifecycle, validation, submit, field binding — [`frontend-forms`](../frontend-forms/SKILL.md); локальный form a11y при реализации формы остаётся там, системный a11y/WCAG-аудит — здесь. Вёрстка, CSS, визуальные токены, Flex/Grid, макет Figma — [`frontend-layout`](../frontend-layout/SKILL.md); hit-area / видимый focus / DOM-порядок при вёрстке остаются там. Route tree, navigation, redirect, URL-state — [`frontend-routing`](../frontend-routing/SKILL.md); scroll / focus / title после client navigation при работе над маршрутом остаются там. XSS, unsanitized HTML, unsafe preview — [`frontend-security`](../frontend-security/SKILL.md), не «чинить» через `innerHTML`. Куда класть слайс / public API — [`frontend-architecture`](../frontend-architecture/SKILL.md). Нет клиентского UI — `references/` не читай.
+**Не этот скил.** Form lifecycle, validation, submit, field binding — [`frontend-forms`](../frontend-forms/SKILL.md); локальный form a11y при реализации формы остаётся там, системный a11y/WCAG-аудит — здесь. Вёрстка, CSS, визуальные токены, Flex/Grid, макет Figma — [`frontend-layout`](../frontend-layout/SKILL.md); hit-area / видимый focus / DOM-порядок при вёрстке остаются там. Route tree, navigation, redirect, URL-state — [`frontend-routing`](../frontend-routing/SKILL.md); scroll / focus / title после client navigation при работе над маршрутом остаются там. XSS, unsanitized HTML, unsafe preview — [`frontend-security`](../frontend-security/SKILL.md), не «чинить» через `innerHTML`. Куда класть слайс / public API — [`frontend-architecture`](../frontend-architecture/SKILL.md). Нужен ли странице SSR/RSC/island и hydration mismatch — [`frontend-ssr`](../frontend-ssr/SKILL.md). Нет клиентского UI — `references/` не читай.
 
 Маршруты (формулировка запроса → скил):
 
@@ -35,6 +36,7 @@ argument-hint: "[аудит | исправить | scope]"
 - «route tree / URL-state / scroll-focus-title при работе над маршрутом» → [`frontend-routing`](../frontend-routing/SKILL.md)
 - «XSS / dangerouslySetInnerHTML / unsafe HTML / preview» → [`frontend-security`](../frontend-security/SKILL.md)
 - «куда положить слайс / public API» → [`frontend-architecture`](../frontend-architecture/SKILL.md)
+- «проверь SSR / гидрацию / нужен ли SSR» → [`frontend-ssr`](../frontend-ssr/SKILL.md)
 
 Пересечение с forms / layout / routing **не** нулевое: при реализации фичи сосед ведёт свой локальный чеклист; при системном a11y/WCAG-запросе этот скил забирает аудит и точечный fix. XSS всегда остаётся у security.
 
@@ -212,6 +214,7 @@ Form-поля, визуальные токены и route-transition **не ко
 - Запрос только про route tree / navigation / URL-state без системного a11y → [`frontend-routing`](../frontend-routing/SKILL.md), этот скил дальше не веди.
 - `dangerouslySetInnerHTML` / unsanitized HTML / unsafe preview → [`frontend-security`](../frontend-security/SKILL.md), не чини через innerHTML.
 - Нужно только размещение слайса → [`frontend-architecture`](../frontend-architecture/SKILL.md), не этот скил.
+- Нужен ли SSR / гидрация / render-mode → [`frontend-ssr`](../frontend-ssr/SKILL.md), этот скил дальше не веди.
 - Scope неясен → спроси компонент, экран, каталог или diff; не сканируй весь монорепо.
 - Стек смешанный → проверяй каждый найденный UI-корень своим API; не унифицируй на React.
 - Инструмента нет в lockfile (в том числе только в `package.json`) или нельзя гарантировать read-only → иди вручную, ограничение укажи в coverage.

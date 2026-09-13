@@ -1,0 +1,16 @@
+---
+description: "Use only when the user explicitly asks for SSR/RSC/hydration or a server-client render boundary: SSR, RSC, hydration, server-client boundary, «проверь SSR / гидрацию», «нужен ли SSR этой странице», «переведи на SSR/RSC», «почини hydration mismatch». Skip `'use client'` / `useRouter` / `Link` / `redirect` / `loading.tsx` / `generateMetadata` as route syntax — those are frontend-routing. Skip HOW loader/RSC fetch, dehydrate, query keys — those are frontend-api. Skip server-module vs client island / public API placement — those are frontend-architecture. Skip XSS / token in bundle / `cookies()` as auth — those are frontend-security. Skip form default values / edit hydration — those are frontend-forms. Skip skeleton / fallback as visual — those are frontend-layout. Skip systemic a11y/WCAG — those are frontend-a11y. Do not start just because a tsx / app / page.tsx / next.config file is open."
+alwaysApply: false
+---
+
+# Frontend SSR
+
+Это правило **не** смешивает решение render-mode с синтаксисом маршрута, HTTP/cache HOW, placement, XSS, form-values hydration, визуальным skeleton или системным a11y. Открытие обычного `ts`/`tsx`, `app/`, `pages/`, `page.tsx` или `next.config.*` **не** запускает этот скил. У правила нет glob вообще — иначе открытый Next-файл сработал бы как routing или security.
+
+Если пользователь **явно** не просил SSR/RSC/hydration или server-client границу (SSR, RSC, hydration, «проверь SSR / гидрацию», «нужен ли SSR этой странице», «переведи на SSR/RSC», «почини hydration mismatch») — **не** читай скил и не применяй его правила. `'use client'` / `useRouter` / `Link` / `redirect` / `loading.tsx` / `generateMetadata` как синтаксис маршрута — зона `frontend-routing`. HOW loader/RSC fetch, dehydrate и query keys — зона `frontend-api`. Куда класть server-модуль vs client island / public API — зона `frontend-architecture`. XSS, token в бандле и `cookies()` как auth — зона `frontend-security`. Default values / edit-гидрация формы — зона `frontend-forms`. Skeleton / fallback как визуал — зона `frontend-layout`. Системный a11y/WCAG — зона `frontend-a11y`.
+
+Перед явным SSR/RSC audit, decision, migrate или fix сначала прочитай полный скил целиком:
+
+`.cursor/skills/frontend/frontend-ssr/SKILL.md`
+
+Правила SSR не дублируй здесь — следуй скилу.

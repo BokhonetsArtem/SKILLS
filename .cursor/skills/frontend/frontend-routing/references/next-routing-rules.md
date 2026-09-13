@@ -41,6 +41,8 @@ Parallel/intercepting routes, `proxy`/`middleware` — не default: тольк�
 
 ### 2. Server / Client boundaries
 
+Нужен ли странице SSR/RSC/island и точечная миграция границы — [`frontend-ssr`](../../frontend-ssr/SKILL.md); этот раздел — синтаксис `'use client'` / router API, не решение render-mode.
+
 По умолчанию файлы `app/` — Server Components. `'use client'` — только там, где нужны хуки браузера или обработчики.
 
 | Нужно | Где |

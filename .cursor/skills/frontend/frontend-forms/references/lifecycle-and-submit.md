@@ -4,6 +4,8 @@
 
 ## 1. Default values, hydration, reset
 
+Слово «hydration» здесь — form values (`defaultValues` / edit `reset`), не SSR/RSC mismatch. Расхождение server HTML и первого клиента — [`frontend-ssr`](../../frontend-ssr/SKILL.md).
+
 Create: `defaultValues` (или Formik `initialValues`) задают пустую форму той же формы, что schema. Не оставляй `undefined` там, где контрол controlled и ждёт `''` / `[]` / `false` — смотри соседей зоны.
 
 Edit: гидрация из сущности в **form values**, не сырой DTO в проп каждого инпута. Маппинг связей и nullable-значений бери у ближайшей edit-формы зоны, не из чужого DTO.

@@ -57,6 +57,8 @@ TypeScript не обязателен: те же правила для `.js` / `.
 
 ## 4. SSR: что здесь, что нет
 
+Нужен ли SSR/RSC/island, mismatch first render и запрет server-only import в client — [`frontend-ssr`](../../frontend-ssr/SKILL.md). Этот раздел — браузерные sinks после гидрации, не решение render-mode.
+
 Клиент после гидрации, `'use client'`, браузерные хуки, `next/script` / `ClientOnly` / `onMount` — здесь.
 
 Не аудируй в этом скиле: SQL/ORM, серверные `headers()`, cookie flags, CSRF-токен сервера, `getServerSideProps` как API-auth, rate limit, CSP в nginx. Это `aif-security-checklist`.

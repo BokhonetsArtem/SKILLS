@@ -1,6 +1,6 @@
 ---
 name: frontend-api
-description: Реализует или изменяет клиентский HTTP/REST по фактическому transport и server-state стеку зоны — client, endpoint, query/mutation, DTO, cache, retry/abort, upload/download. Use when implementing or changing an HTTP client, endpoint, query, mutation, DTO mapping, cache invalidation, retry, abort, upload or download. Не для placement/public API/owner state, form binding, UI-состояний, security-аудита, GraphQL, SSE или WebSocket. Не для route tree, client navigation и URL-state маршрута — это frontend-routing. Не ставит второй клиент без новой transport/auth/origin границы.
+description: Реализует или изменяет клиентский HTTP/REST по фактическому transport и server-state стеку зоны — client, endpoint, query/mutation, DTO, cache, retry/abort, upload/download. Use when implementing or changing an HTTP client, endpoint, query, mutation, DTO mapping, cache invalidation, retry, abort, upload or download. Не для placement/public API/owner state, form binding, UI-состояний, security-аудита, GraphQL, SSE или WebSocket. Не для route tree, client navigation и URL-state маршрута — это frontend-routing. Не для решения, нужен ли странице SSR/RSC/island — это frontend-ssr; HOW loader/RSC fetch, dehydrate и query keys остаётся здесь. Не ставит второй клиент без новой transport/auth/origin границы.
 argument-hint: "[endpoint | query | mutation]"
 ---
 
@@ -21,8 +21,9 @@ argument-hint: "[endpoint | query | mutation]"
 - «скелетон / toast / empty UI» → [`frontend-layout`](../frontend-layout/SKILL.md)
 - «аудит хранения токена / public env» → [`frontend-security`](../frontend-security/SKILL.md)
 - «OWASP / CSRF / server auth» → [`aif-security-checklist`](../../aif-security-checklist/SKILL.md)
+- «нужен ли SSR / гидрация / server-data граница» → [`frontend-ssr`](../frontend-ssr/SKILL.md)
 
-GraphQL, SSE и WebSocket — отдельные транспорты: REST-рецепты к ним не применяй. Если задача сразу про **новый слайс и API** — сначала placement/ownership (architecture), затем HTTP-контракт (здесь), затем forms/layout при необходимости. Security запускай только по явному запросу на аудит.
+Нужен ли странице SSR/RSC/island — [`frontend-ssr`](../frontend-ssr/SKILL.md); HOW loader/RSC fetch, dehydrate и query keys остаётся здесь. GraphQL, SSE и WebSocket — отдельные транспорты: REST-рецепты к ним не применяй. Если задача сразу про **новый слайс и API** — сначала placement/ownership (architecture), затем HTTP-контракт (здесь), затем forms/layout при необходимости. Security запускай только по явному запросу на аудит.
 
 **Auth.** Подключение `credentials`, auth header и refresh/retry по **уже существующему контракту зоны** — этот скил. Размещение auth/session-модуля — [`frontend-architecture`](../frontend-architecture/SKILL.md). Место хранения токена не выбирай и не переноси без отдельного запроса. Не канонизируй `localStorage`, cookie или иной storage. Выбор или аудит token storage — [`frontend-security`](../frontend-security/SKILL.md); серверные cookie flags / CSRF / authorization — [`aif-security-checklist`](../../aif-security-checklist/SKILL.md).
 
@@ -135,4 +136,5 @@ Optimistic update, infinite query, SSR loaders и codegen — не default: то
 - Пользователь не просил новый слой → не добавляй второй client/query cache и не ставь codegen.
 - Scope ушёл в соседнюю область → вернись к routing-таблице; GraphQL/SSE/WebSocket не конвертируй в REST.
 - Client navigation / route tree / URL-state без HTTP-контракта → [`frontend-routing`](../frontend-routing/SKILL.md), не этот скил.
+- Нужен ли SSR / гидрация / server-data граница, а не HOW dehydrate → [`frontend-ssr`](../frontend-ssr/SKILL.md), не этот скил.
 - Пользователь не просил сменить token storage → не выбирай и не переноси `localStorage`, cookie или иной storage.
