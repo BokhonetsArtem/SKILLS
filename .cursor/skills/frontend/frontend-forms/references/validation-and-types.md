@@ -39,7 +39,7 @@ Async-проверка не должна блокировать ввод на к
 | Трек | Куда писать |
 | --- | --- |
 | RHF | `setError('field', { type: 'server', message })`; сброс — успешный ввод / `clearErrors` / новый submit |
-| Formik | `setFieldError` и/или `setStatus` + отображение `errors` / `status`; не подменяй это одним `setStatus` без поля, если ошибка привязана к полю |
+| Formik | Ошибка поля — `setFieldError` + отображение `errors`; `setStatus` и `status` — только для общей ошибки запроса или неизвестного поля |
 | native | тот же словарь ошибок, что и для client validation; ключ поля совпадает с контролом |
 | Другая library / framework-managed | field-error API уже выбранного трека или его локальный error map; не подставляй `setError`/`setFieldError` из чужой библиотеки |
 

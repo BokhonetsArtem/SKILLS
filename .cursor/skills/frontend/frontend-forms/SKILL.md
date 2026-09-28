@@ -90,7 +90,7 @@ argument-hint: "[форма | валидация | submit]"
 
 | Задача | Тематический reference сверх уже выбранных файлов режима |
 | --- | --- |
-| Schema, типы значений, sync/async validation, `setError` / Formik `status`+`errors` | [validation-and-types.md](references/validation-and-types.md) |
+| Schema, типы значений, sync/async validation, RHF `setError` / Formik `setFieldError`; общая ошибка через Formik `setStatus` | [validation-and-types.md](references/validation-and-types.md) |
 | Label, `aria-invalid`, `aria-describedby`, focus первой ошибки, checkbox/radio/select/file | [fields-and-accessibility.md](references/fields-and-accessibility.md) |
 | Default values, create/edit hydration, reset, dirty, leave guard, arrays, double-submit | [lifecycle-and-submit.md](references/lifecycle-and-submit.md) |
 
@@ -104,7 +104,7 @@ argument-hint: "[форма | валидация | submit]"
 
 - значения полей живут в form state выбранной библиотеки (или native state), не дублируй всю форму в параллельный `useState` и не клади form state в глобальный store без прецедента;
 - валидация — schema ↔ form values ↔ API DTO; client validation не считать защитой сервера;
-- ошибки конкретного поля — через API трека (`setError` / Formik `errors`+`status`), не только toast; нормализацию HTTP-ошибки не делай здесь — [`frontend-api`](../frontend-api/SKILL.md);
+- ошибки конкретного поля — через API трека (RHF `setError` / Formik `setFieldError`), не только toast; Formik `setStatus` оставь для общей ошибки запроса; нормализацию HTTP-ошибки не делай здесь — [`frontend-api`](../frontend-api/SKILL.md);
 - разметка — настоящий `<form onSubmit>` и кнопка `type="submit"` (Enter-submit); не заменяй это одним `Button.onClick={handleSubmit(...)}`, даже если так сделано в соседнем экране;
 - динамические списки — API трека (`useFieldArray` / `FieldArray`); в RHF React key — внутренний `field.id`, доменный id хранится отдельно, в остальных треках — stable id/helper, не индекс массива;
 - file/image: локальный preview в `useState` допустим, отправляемое значение — в form state через API выбранного трека (`setValue`, `Field`, локальный setter и т.п.).

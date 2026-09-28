@@ -45,7 +45,8 @@ argument-hint: "[аудит | исправить | scope]"
 | Тема | Кто ведёт при реализации | Кто ведёт при системном a11y-запросе |
 | --- | --- | --- |
 | label / `htmlFor` / `aria-invalid` / focus первой ошибки | [`frontend-forms`](../frontend-forms/SKILL.md) + [fields-and-accessibility.md](../frontend-forms/references/fields-and-accessibility.md) | этот скил |
-| DOM-порядок, семантика, hit-area, видимый focus, reduced motion | [`frontend-layout`](../frontend-layout/SKILL.md) + [pravila.md](../frontend-layout/references/pravila.md) §6 | этот скил |
+| DOM-порядок = визуальный порядок | [`frontend-layout`](../frontend-layout/SKILL.md) + [pravila.md](../frontend-layout/references/pravila.md) §5 | этот скил |
+| Семантика, hit-area, видимый focus, reduced motion | [`frontend-layout`](../frontend-layout/SKILL.md) + [pravila.md](../frontend-layout/references/pravila.md) §6 | этот скил |
 | scroll / focus / title после client navigation | [`frontend-routing`](../frontend-routing/SKILL.md) + [navigation-state-and-boundaries.md](../frontend-routing/references/navigation-state-and-boundaries.md) §7 | этот скил |
 | XSS / unsafe HTML / preview | [`frontend-security`](../frontend-security/SKILL.md) | [`frontend-security`](../frontend-security/SKILL.md) (a11y только hand-off) |
 
@@ -110,7 +111,7 @@ Form-поля, визуальные токены и route-transition **не ко
 | evidence, статус, порядок fix, повторная проверка | [audit-and-fix.md](references/audit-and-fix.md) |
 | как надо / как не надо | [examples-good-and-bad.md](references/examples-good-and-bad.md) |
 
-Узкий запрос (только имя кнопки, только модалка, только live region) — читай один тематический файл, не все. Form-рецепты, токены и route-transition API **не копируй**: отсылай к [fields-and-accessibility.md](../frontend-forms/references/fields-and-accessibility.md), [pravila.md](../frontend-layout/references/pravila.md) §6, [navigation-state-and-boundaries.md](../frontend-routing/references/navigation-state-and-boundaries.md) §7.
+Узкий запрос (только имя кнопки, только модалка, только live region) — читай один тематический файл, не все. Form-рецепты, ритм через `gap`, визуальные токены и route-transition API **не копируй**: отсылай к [fields-and-accessibility.md](../frontend-forms/references/fields-and-accessibility.md), [pravila.md](../frontend-layout/references/pravila.md) §2 (`gap`) и §3 (токены), [navigation-state-and-boundaries.md](../frontend-routing/references/navigation-state-and-boundaries.md) §7.
 
 Паттерн бери у **ближайшего UI той же зоны**. Имена и импорты — как **здесь**. Чужие product path и обязательные библиотеки из examples скила в репозиторий не переноси.
 

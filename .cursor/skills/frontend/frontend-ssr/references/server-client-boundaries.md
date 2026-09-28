@@ -4,7 +4,7 @@
 
 Placement server-модуля vs island / public API — [`frontend-architecture`](../../frontend-architecture/SKILL.md). Если файлы должны переехать, сначала placement, затем этот файл.
 
-Cookie flags, CSRF, `cookies()` как проверка сессии — [`frontend-security`](../../frontend-security/SKILL.md) + [`aif-security-checklist`](../../../aif-security-checklist/SKILL.md). Здесь cookies/headers — только **render-input**.
+`cookies()` как проверка сессии — [`frontend-security`](../../frontend-security/SKILL.md). Серверные cookie flags (`Secure` / `HttpOnly` / `SameSite`) и CSRF — [`aif-security-checklist`](../../../aif-security-checklist/SKILL.md). Здесь cookies/headers — только **render-input**.
 
 Значения cookie/header и токены в чат не выводи: `[REDACTED]`. Runtime-логи границы не добавляй.
 
@@ -65,7 +65,7 @@ Server parent остаётся владельцем данных и статич
 | Заголовок `Accept-Language` как вход сортировки строк на сервере | Cookie flags, `Secure`/`HttpOnly`, CSRF |
 | Стабильный snapshot, чтобы first render совпал | `cookies()` в client module |
 
-Не цитируй значение cookie/header. В evidence пиши имя ключа и `file:line`. Вызов `cookies()` / `headers()` на server page — также факт подтипа `request-dynamic` ([discovery-and-render-mode.md](discovery-and-render-mode.md) §1.1): не снимай его, чтобы «сделать страницу static». Auth-решение по cookie — hand-off в security / чеклист, даже если оно стоит рядом с SSR page.
+Не цитируй значение cookie/header. В evidence пиши имя ключа и `file:line`. Вызов `cookies()` / `headers()` на server page — также факт подтипа `request-dynamic` ([discovery-and-render-mode.md](discovery-and-render-mode.md) §1.1): не снимай его, чтобы «сделать страницу static». `cookies()` как auth отдай в [`frontend-security`](../../frontend-security/SKILL.md); серверные cookie flags и CSRF — в [`aif-security-checklist`](../../../aif-security-checklist/SKILL.md), даже если они стоят рядом с SSR page.
 
 `redirect` после чтения сессии — синтаксис и место вызова: [`frontend-routing`](../../frontend-routing/SKILL.md), не этот файл.
 

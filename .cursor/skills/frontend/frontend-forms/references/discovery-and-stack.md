@@ -74,7 +74,7 @@ Reuse **не** значит копировать дыры примитивов. 
 
 | Нужно | Файл |
 | --- | --- |
-| Schema, типы, `setError` / Formik `errors`+`status`, i18n ошибок | [validation-and-types.md](validation-and-types.md) |
+| Schema, типы, RHF `setError` / Formik `setFieldError`, Formik `setStatus` для общей ошибки, i18n ошибок | [validation-and-types.md](validation-and-types.md) |
 | Label, `aria-*`, focus ошибки, виджеты | [fields-and-accessibility.md](fields-and-accessibility.md) |
 | Submit, reset, dirty, arrays, leave-guard | [lifecycle-and-submit.md](lifecycle-and-submit.md) |
 | Сниппеты | только `examples-rhf.md` / `examples-formik.md` / `examples-native.md` своего трека |

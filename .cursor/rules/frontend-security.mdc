@@ -1,6 +1,6 @@
 ---
 description: "Use only when the user explicitly asks for a frontend/client source-to-sink security audit (DOM XSS, unsafe URL, postMessage, client tokens, public env, XSS/unsafe field preview). Skip generic «is this secure?», pre-deploy/OWASP, CSP headers, server auth, CSRF, SQL/command injection, infra, and dependency CVEs — those are aif-security-checklist. Skip ordinary HTTP client setup, credentials and refresh — those are frontend-api, not an audit. Skip ordinary form validation and submit — those are frontend-forms, not a reason to start an audit. Skip ordinary route tree/navigation/redirect — those are frontend-routing, not an audit. Skip SSR/RSC/hydration and render-mode decisions — those are frontend-ssr; XSS / token in bundle / cookies() as auth stay here. Do not start an audit just because a ts/tsx file is open."
-globs: "**/index.html,**/*.{html,vue,svelte},**/{sw,service-worker,serviceWorker}.{js,ts},**/*.worker.{js,ts},**/{vite,vitest,webpack,rspack,rollup,esbuild,next,nuxt,svelte,astro,remix,angular}.config.*"
+globs: "**/index.html,**/*.html,**/*.vue,**/*.svelte,**/sw.js,**/sw.ts,**/service-worker.js,**/service-worker.ts,**/serviceWorker.js,**/serviceWorker.ts,**/*.worker.js,**/*.worker.ts,**/vite.config.*,**/vitest.config.*,**/webpack.config.*,**/rspack.config.*,**/rollup.config.*,**/esbuild.config.*,**/next.config.*,**/nuxt.config.*,**/svelte.config.*,**/astro.config.*,**/remix.config.*,**/angular.config.*"
 alwaysApply: false
 ---
 

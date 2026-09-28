@@ -5,7 +5,7 @@
 Не копируй:
 
 - поля, `htmlFor`, `aria-invalid`, focus первой ошибки — [`fields-and-accessibility.md`](../../frontend-forms/references/fields-and-accessibility.md);
-- hit-area, токены, DOM-порядок как вёрстку — [`pravila.md`](../../frontend-layout/references/pravila.md) §5–§6;
+- ритм через `gap` — [`pravila.md`](../../frontend-layout/references/pravila.md) §2, токены — §3, DOM-порядок — §5, hit-area и видимый focus — §6;
 - scroll / focus / title API роутера — [`navigation-state-and-boundaries.md`](../../frontend-routing/references/navigation-state-and-boundaries.md) §7.
 
 Дельта аудита полей — [semantics-and-names.md](semantics-and-names.md) §6. Дельта SPA-перехода — [keyboard-focus-and-dynamics.md](keyboard-focus-and-dynamics.md) §6. Непроверяемое восприятие — `INCOMPLETE`, правила статуса в [audit-and-fix.md](audit-and-fix.md).

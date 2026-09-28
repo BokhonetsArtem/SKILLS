@@ -220,7 +220,7 @@ save().then(function () {
 </div>
 ```
 
-Токены и `gap` при вёрстке — [`pravila.md`](../../frontend-layout/references/pravila.md) §5; здесь важен факт: Tab ≠ взгляд.
+Ритм через `gap` при вёрстке — [`pravila.md`](../../frontend-layout/references/pravila.md) §2, токены — §3, совпадение DOM и визуального порядка — §5; здесь важен факт: Tab ≠ взгляд.
 
 ## 10. Анимация без альтернативы против `prefers-reduced-motion`
 
